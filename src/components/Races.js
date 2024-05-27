@@ -46,6 +46,7 @@ export default function Races() {
                                 <td>{race.date}</td>
                                 <td>{race.Results[0].Driver.familyName}</td>
                             </tr>
+                            
                         )
 
                     })}
