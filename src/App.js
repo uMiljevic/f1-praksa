@@ -20,7 +20,6 @@ function App() {
             <img src={Logo} alt="F1 Logo" />
           </div>
 
-<<<<<<< HEAD
           <div className="list-container">
             <ul>
               <li>
@@ -41,7 +40,6 @@ function App() {
           <div className="search">
             <input type="text" placeholder="Search" />
           </div>
-=======
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -59,7 +57,6 @@ function App() {
               <Link to="/driver-details">Drivers</Link>
             </li>
           </ul>
->>>>>>> be1909d519fe6ce11ffda428805bd50ab0494e94
         </nav>
 
         <Routes>
