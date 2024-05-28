@@ -11,32 +11,33 @@ function App() {
   return (
     <div className="main-container">
 
-      {/* <div className="search">
-        <input type="text" placeholder="Search"/>
-      </div> */}
-
-      <div className="nav-img">
-        <img src={Logo} alt="F1 Logo" />
-      </div>
-
       <Router>
         <nav className="nav-bar">
 
+          <div className="nav-img">
+            <img src={Logo} alt="F1 Logo" />
+          </div>
 
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/drivers">Drivers</Link>
-            </li>
-            <li>
-              <Link to="/teams" >Teams</Link>
-            </li>
-            <li>
-              <Link to="/races">Races</Link>
-            </li>
-          </ul>
+          <div className="list-container">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/drivers">Drivers</Link>
+              </li>
+              <li>
+                <Link to="/teams" >Teams</Link>
+              </li>
+              <li>
+                <Link to="/races">Races</Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className="search">
+            <input type="text" placeholder="Search" />
+          </div>
         </nav>
 
         <Routes>

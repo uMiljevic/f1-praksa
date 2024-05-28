@@ -8,27 +8,33 @@ body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-image: url("./images/HomePage\ Cover.jpg");
-  background-color: #cccccc; /* Used if the image is unavailable */
-  height: 100vh; /* You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover;
+  /* background-image: url("./images/HomePage\ Cover.jpg");
+  background-color: #cccccc; 
+  height: 100vh; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; */
 }
 
-.main-container{
+/* .main-container{
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  flex-direction: column;
+} */
 
 /* Nav Bar */
 .nav-bar{
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.list-container{
+  display: flex;
+  justify-content: space-around;
   align-items: center;
   width: 50%;
-  margin-top: 20px;
 }
 
 /* .nav-img{
@@ -37,7 +43,6 @@ body{
 } */
 
 .nav-img img{
-  margin-top: 20px;
   height: 70px;
   cursor: pointer;
 }
@@ -53,7 +58,7 @@ body{
 
 .nav-bar ul a{
   text-decoration: none;
-  color: #fff;
+  /* color: #fff; */
   font-size: 18px;
   font-weight: 800;
 }
