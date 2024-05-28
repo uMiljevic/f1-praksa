@@ -17,15 +17,20 @@ export default function Drivers(){
 
 
     return(
-        <div>
-            <h1>Drivers</h1>
-            <ul>
-                {drivers.map(function(item){
-                    return(
-                        <li>{item.position}</li>
-                    );
-                })}
-            </ul>
-        </div>
+        <table className = "table">
+        <tbody>
+        {drivers.map((driver) => {
+            return (
+                <tr key = {driver.Driver.driverId}>
+                    <td>{driver.position} </td>
+                    <td>{driver.Driver.givenName + " " + driver.Driver.familyName} </td>
+                    <td>{driver.Constructors [0].name} </td>
+                    <td>{driver.points}  </td>
+                </tr>
+            );
+        })};
+
+        </tbody>
+    </table>
     );
 }
