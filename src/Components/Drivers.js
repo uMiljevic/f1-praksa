@@ -17,9 +17,11 @@ export default function Drivers() {
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
     }
 
-    // const handleClickDriverDetails = (drivers.driverId) {
-    //     console.log()
-    // }
+    const handleClickDriverDetails = (driverId) => {
+        console.log("driver id", driverId);
+        const linkTo = `/driverDetails/${driverId}`;
+        navigate(linkTo);
+    }
 
 
     return (
@@ -29,15 +31,15 @@ export default function Drivers() {
                     return (
                         <tr key={driver.Driver.driverId}>
                             <td>{driver.position} </td>
-                            {/* <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)}>
-                                {driver.Driver.givenName + " " + driver.Driver.familyName} </td> */}
+                            <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)}>
+                                {driver.Driver.givenName + " " + driver.Driver.familyName} </td>
                             <td>{driver.Constructors[0].name} </td>
                             <td>{driver.points}  </td>
                         </tr>
                     );
-                })};
+                })}
 
             </tbody>
         </table>
-    );
-}
+    )
+};
