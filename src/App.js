@@ -59,9 +59,9 @@ function App() {
           <Route path="/drivers" element={<Drivers />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/races" element={<Races />} />
-          <Route path="/driver/details" element={<DriverDetails />} />
-          <Route path="/team/details" element={<TeamDetails />} />
-          <Route path="/race/details" element={<RaceDetails />} />
+          <Route path="/driverDetails/:driverId" element={<DriverDetails />} />
+          <Route path="/teamDetails/:teamId" element={<TeamDetails />} />
+          <Route path="/raceDetails/:raceId" element={<RaceDetails />} />
         </Routes>
       </Router>
     </div>
