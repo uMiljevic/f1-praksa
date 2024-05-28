@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export default function Drivers() {
     const [driverDetails, setDriverDetails] = useState([]);
-    const [driverResults, setDtiverResults] = useState([]);
+    const [driverResults, setDriverResults] = useState([]);
     const params = useParams();
 
     useEffect(() => {
@@ -15,14 +15,14 @@ export default function Drivers() {
     const getDriverDetails = async () => {
         const driverId = params.driverId;
         const urlStandings = `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
-        const urlResults = `http://ergast.com/api/f1/2013/${driverId}/results.json`;
+        const urlResults = `http://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
 
-        const response = await axios.get(urlStandings);
+        const responseDetails = await axios.get(urlStandings);
         const responeseResults = await axios.get(urlResults);
 
-        // console.log(response.data.MRData.StandingsTable.StandingsLists[0]);
-        setDriverDetails(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-        setDriverResults(responeseResults.data.MRData.StandingsTable);
+        console.log(responseDetails);
+        setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        setDriverResults(responeseResults.data.MRData.RaceTable.Races);
 
     }
 
@@ -47,10 +47,11 @@ export default function Drivers() {
                         return (
                             <div>
                                 <tr key={results.driverId}>
-                                    <td>{results.round} </td>
-                                    <td>{results.Constructors[0].name} </td>
-                                    <td>{results.position} </td>
-                                    <td>  </td>
+                                    <td> {results.round} </td>
+                                    <td> {results.raceName} </td>
+                                    <td> {results.Results[0].Constructor.name} </td>
+                                    <td> {results.Results[0].grid} </td>
+                                    <td> {results.Results[0].position} </td>
                                 </tr>
                             </div>
                         );
