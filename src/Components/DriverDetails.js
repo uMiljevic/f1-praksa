@@ -39,7 +39,6 @@ export default function Drivers() {
                                     <td>Biography:  </td>
                                 </tr>
                             </div>
-
                         );
                     })}
                 </tbody>
