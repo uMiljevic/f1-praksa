@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Drivers(){
+export default function Drivers() {
     const [drivers, setDrivers] = useState([]);
+    const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         getDrivers();
     }, []);
 
@@ -13,24 +15,29 @@ export default function Drivers(){
         const response = await axios.get(url);
         console.log(response.data.MRData.StandingsTable.StandingsLists[0]);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-    };
+    }
+
+    // const handleClickDriverDetails = (drivers.driverId) {
+    //     console.log()
+    // }
 
 
-    return(
-        <table className = "table">
-        <tbody>
-        {drivers.map((driver) => {
-            return (
-                <tr key = {driver.Driver.driverId}>
-                    <td>{driver.position} </td>
-                    <td>{driver.Driver.givenName + " " + driver.Driver.familyName} </td>
-                    <td>{driver.Constructors [0].name} </td>
-                    <td>{driver.points}  </td>
-                </tr>
-            );
-        })};
+    return (
+        <table className="table">
+            <tbody>
+                {drivers.map((driver) => {
+                    return (
+                        <tr key={driver.Driver.driverId}>
+                            <td>{driver.position} </td>
+                            {/* <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)}>
+                                {driver.Driver.givenName + " " + driver.Driver.familyName} </td> */}
+                            <td>{driver.Constructors[0].name} </td>
+                            <td>{driver.points}  </td>
+                        </tr>
+                    );
+                })};
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     );
 }
