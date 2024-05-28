@@ -4,7 +4,7 @@ import Drivers from "./Components/Drivers";
 import Races from "./Components/Races";
 import Teams from "./Components/Teams";
 import React from "react";
-import images from "./images/NavBar Image 2.jpg";
+import Logo from "./images/f1 logo.png";
 
 
 function App() {
@@ -15,11 +15,13 @@ function App() {
         <input type="text" placeholder="Search"/>
       </div> */}
 
+      <div className="nav-img">
+        <img src={Logo} alt="F1 Logo" />
+      </div>
+
       <Router>
         <nav className="nav-bar">
-          <div className="nav-img">
-            <img src={images} alt="F1 Feeder"/>
-          </div>
+
 
           <ul>
             <li>
@@ -49,3 +51,4 @@ function App() {
 }
 
 export default App;
+
