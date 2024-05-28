@@ -1,16 +1,12 @@
 
 
 import React, { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
-
 export default function Races() {
-
+    const navigate = useNavigate();
     const [allRaces, setAllRaces] = useState([]);
-    // const [raceQualifiers, setRaceQualifiers] = useState([]);
-    // const [raceResults, setRaceResults] = useState([]);
 
     useEffect(() => {
         getAllRaces();
@@ -19,9 +15,14 @@ export default function Races() {
     const getAllRaces = async () => {
         const urlAllRaces = "https://ergast.com/api/f1/2013/results/1.json";
         const response = await axios.get(urlAllRaces);
-        console.log(response.data.MRData.RaceTable.Races);
+        //console.log(response.data.MRData.RaceTable.Races);
         setAllRaces(response.data.MRData.RaceTable.Races);
     }
+
+    const handleClickGetRaces = (raceId) => {
+        const linkTo = `/raceDetails/${raceId}`;
+        navigate(linkTo);
+    };
 
     return (
         <div>
@@ -43,21 +44,15 @@ export default function Races() {
                         return (
                             <tr >
                                 <td>{race.round}</td>
-                                <td>{race.raceName}</td>
+                                <td onClick={() => handleClickGetRaces(race.round)}>{race.raceName}</td>
                                 <td>{race.Circuit.circuitName}</td>
                                 <td>{race.date}</td>
                                 <td>{race.Results[0].Driver.familyName}</td>
                             </tr>
-                            
                         )
-
                     })}
                 </tbody>
             </table>
-
         </div>
     );
-
-
-
 }
