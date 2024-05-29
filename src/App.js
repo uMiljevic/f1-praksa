@@ -81,13 +81,13 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home />} flags={flags}/>
-          <Route path="/drivers" element={<Drivers />} flags={flags}/>
-          <Route path="/teams" element={<Teams />} flags={flags}/>
-          <Route path="/races" element={<Races />} flags={flags}/>
-          <Route path="/driverDetails/:driverId" element={<DriverDetails />} flags={flags}/>
-          <Route path="/teamDetails/:teamId" element={<TeamDetails />} flags={flags}/>
-          <Route path="/raceDetails/:raceId" element={<RaceDetails />} flags={flags}/>
+          <Route path="/" element={<Home flags={flags}/>} />
+          <Route path="/drivers" element={<Drivers flags={flags}/>} />
+          <Route path="/teams" element={<Teams flags={flags}/>} />
+          <Route path="/races" element={<Races flags={flags}/>} />
+          <Route path="/driverDetails/:driverId" element={<DriverDetails flags={flags}/>} />
+          <Route path="/teamDetails/:teamId" element={<TeamDetails flags={flags}/>} />
+          <Route path="/raceDetails/:raceId" element={<RaceDetails flags={flags}/>} />
         </Routes>
       </Router>
     </div>
