@@ -36,6 +36,7 @@ console.log(props);
 
   return (
     <div className="teams">
+      <h2>Constructors Championship Standings - 2013</h2>
       <table className="table">
         <thead>
           <th>Position</th>
@@ -45,11 +46,12 @@ console.log(props);
         </thead>
         <tbody>
           {teams.map((team, i) => {
-            console.log(team);
+            console.log('team',team);
             return (
               <tr key={i}>
                 <td>{team.position}</td>
-                <td onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>{team.Constructor.name}</td>
+                <td onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
+                  <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} />{team.Constructor.name}</td>
                 <td><a href={team.Constructor.url} target="_blank">Details</a></td>
                 <td>{team.points}</td>
               </tr>
