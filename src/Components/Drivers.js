@@ -15,7 +15,7 @@ export default function Drivers() {
         getDrivers();
     }, []);
 
-    const getDrivers = async () => {
+    const getDrivers = async (props) => {
         const url = "http://ergast.com/api/f1/2013/driverStandings.json";
         const response = await axios.get(url);
         console.log(response.data.MRData.StandingsTable.StandingsLists[0]);
@@ -41,7 +41,7 @@ export default function Drivers() {
                     return (
                         <tr key={driver.Driver.driverId}>
                             <td>{driver.position} </td>
-                            <td><Flag country= {getAlphaCode (driver.Driver.nationality)} /></td>
+                            <td><Flag country = {getAlphaCode(props.flags, driver.Driver.nationality)} size={15} /></td>
                             <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)}>
                             {driver.Driver.givenName + " " + driver.Driver.familyName} </td>
                             <td>{driver.Constructors[0].name} </td>
