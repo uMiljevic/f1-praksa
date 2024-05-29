@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Flag from 'react-flagkit';
 
 export default function Races() {
     const navigate = useNavigate();

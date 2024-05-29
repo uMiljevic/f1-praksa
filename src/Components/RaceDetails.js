@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Flag from 'react-flagkit';
 
 export default function RaceDetails() {
     const [raceQualifiers, setRaceQualifiers] = useState([]);
@@ -14,7 +15,7 @@ export default function RaceDetails() {
 
     const getRaceDetails = async () => {
         const raceId = params.raceId;
-        console.log("raceId", raceId);
+        //console.log("raceId", raceId);
         const urlQualifiers = `https://ergast.com/api/f1/2013/${raceId}/qualifying.json`;
         const urlResults = `https://ergast.com/api/f1/2013/${raceId}/results.json`;
 
@@ -31,7 +32,7 @@ export default function RaceDetails() {
     const getBestTimes = (qualifier) => {
         const bestTime = [qualifier.Q1, qualifier.Q2, qualifier.Q3];
         const sortBestTime = bestTime.sort();
-        return(
+        return (
             `${sortBestTime[0]}`
         )
     }
@@ -44,14 +45,24 @@ export default function RaceDetails() {
 
     return (
         <>
-            <tr >
-                <td>Country: {raceResults.Circuit.Location.country} </td>
-                <td>Location: {raceResults.Circuit.Location.locality} </td>
-                <td>Date: {raceResults.date} </td>
-                <td>Full report: </td>
-            </tr>
+            <ul >
+                <li>Country: {raceResults.Circuit.Location.country} </li>
+                <li>Location: {raceResults.Circuit.Location.locality} </li>
+                <li>Date: {raceResults.date} </li>
+                <li>Full report: <a href={raceResults.url} target="_Blanc">Icon</a></li>
+            </ul>
 
-            <table className="table">
+            <table className="table1">
+                <thead>
+                <h3>Qualifying Results</h3>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Driver</th>
+                        <th>Team</th>
+                        <th>Best Time</th>
+
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
                         {raceQualifiers.map((qualifier) => {
@@ -59,19 +70,35 @@ export default function RaceDetails() {
                             return (
 
                                 <tr key={qualifier.position}>
-                                    <td>Pos: {qualifier.position}</td>
-                                    <td>Driver: {qualifier.Driver.familyName} </td>
-                                    <td>Team: {qualifier.Constructor.constructorId} </td>
-                                    <td>Best Time: {getBestTimes(qualifier)} </td>
-                                    <td>  </td>
+                                    <td>{qualifier.position}</td>
+                                    <td>{qualifier.Driver.familyName} </td>
+                                    <td>{qualifier.Constructor.constructorId} </td>
+                                    <td>{getBestTimes(qualifier)} </td>
+                                    
                                 </tr>
 
                             );
                         })}
                     </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <h3>Race Results</h3>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Driver</th>
+                        <th>Team</th>
+                        <th>Result</th>
+                        <th>Points</th>
+
+                    </tr>
+                </thead>
+                <tbody>
                     <tr>
                         {raceResults.Results.map((result) => {
-                            console.log(result);
+                            //console.log(result);
                             return (
 
                                 <tr key={result.raceName}>
@@ -87,6 +114,8 @@ export default function RaceDetails() {
                     </tr>
                 </tbody>
             </table>
+
+
         </>
     );
 }
