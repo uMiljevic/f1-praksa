@@ -6,17 +6,32 @@ import TeamDetails from "./Components/TeamDetails";
 import RaceDetails from "./Components/RaceDetails";
 import Races from "./Components/Races";
 import Teams from "./Components/Teams";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "./images/f1 logo.png";
 import { Input, Space } from 'antd';
+import axios from "axios";
+
 
 function App() {
-  
+
   const { Search } = Input;
   const onSearch = (value, _e, info) => console.log(info?.source, value);
+  const [flag, setFlag] = useState([]);
+
+  useEffect(()=>{
+    getFlag();
+  }, []);
+
+  const getFlag = async () => {
+    const urlFlag = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
+    const response = await axios.get(urlFlag);
+    console.log('flag', response.data);
+    setFlag(response.data);
+  };
 
   return (
     <div className="main-container">
+      
 
       <Router>
         <nav className="nav-bar">
@@ -66,13 +81,13 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/drivers" element={<Drivers />} />
-          <Route path="/teams" element={<Teams />} />
-          <Route path="/races" element={<Races />} />
-          <Route path="/driverDetails/:driverId" element={<DriverDetails />} />
-          <Route path="/teamDetails/:teamId" element={<TeamDetails />} />
-          <Route path="/raceDetails/:raceId" element={<RaceDetails />} />
+          <Route path="/" element={<Home />} flags={flag}/>
+          <Route path="/drivers" element={<Drivers />} flags={flag}/>
+          <Route path="/teams" element={<Teams />} flags={flag}/>
+          <Route path="/races" element={<Races />} flags={flag}/>
+          <Route path="/driverDetails/:driverId" element={<DriverDetails />} flags={flag}/>
+          <Route path="/teamDetails/:teamId" element={<TeamDetails />} flags={flag}/>
+          <Route path="/raceDetails/:raceId" element={<RaceDetails />} flags={flag}/>
         </Routes>
       </Router>
     </div>
