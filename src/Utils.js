@@ -4,5 +4,5 @@ export function getAlphaCode(flags, value) {
         flag.nationality.toLowerCase() === value.toLowerCase()
     );
 
-    if(flagsData.length === 1) return flagsData[0].apha_2_code;
+    return flagsData === 1 ? flagsData[0].apha_2_code : value ;
 }
