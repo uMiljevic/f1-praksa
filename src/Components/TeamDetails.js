@@ -1,89 +1,89 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export default function TeamDetails() {
-    const [teamDetails, setTeamDetails] = useState([]);
-    const [teamResults, setTeamResults] = useState ([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const params = useParams ();
+  const [teamDetails, setTeamDetails] = useState([]);
+  const [teamResults, setTeamResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
 
-    useEffect(() => {
-        getTeamDetails();
+  useEffect(() => {
+    getTeamDetails();
 
-    }, []);
+  }, []);
 
 
 
-    const getTeamDetails = async () => {
-        const teamId = params.teamId;
-        console.log(teamId);
+  const getTeamDetails = async () => {
+    const teamId = params.teamId;
+    //console.log(teamId);
 
-        const urlTeamDetails = `http://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`;
-        const urlTeamResults = `http://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
+    const urlTeamDetails = `http://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`;
+    const urlTeamResults = `http://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
 
-        const detailsResponse = await axios.get(urlTeamDetails);
-        console.log(detailsResponse);
-        const resultsResponse = await axios.get(urlTeamResults);
-        console.log(resultsResponse);
-       
-        setTeamResults(detailsResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
-        setTeamDetails(resultsResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
-        setIsLoading(false);
-    }
+    const detailsResponse = await axios.get(urlTeamDetails);
+    // console.log("details", detailsResponse);
+    const resultsResponse = await axios.get(urlTeamResults);
+    // console.log('results', resultsResponse.data.MRData.RaceTable.Races[0]);
+    // console.log('results', resultsResponse.data);
     
-    if(isLoading) {
-      return (<h1>Loading...</h1>);
-    }
+    // setTeamDetails(detailsResponse.data.MRData.StandingsTable.StandingsLists);
+    
+    setTeamResults(resultsResponse.data.MRData.RaceTable.Races);
 
-    return (
-        <div>
-            <div>
-            <tr>
-                <td>Country: {teamDetails[0].Constructor.nationality}</td>
-                {/* <td>Position: {teamDetails.Constructor.name}</td>
-                <td>Points: {teamDetails.points}</td>
-                <td>History: <a href={teamDetails.Constructor.url} target="_blank">history</a></td> */}
+    setIsLoading(false);
+  }
 
-            </tr>
-            </div>
+  if (isLoading) {
+    return (<h1>Loading...</h1>);
+  }
 
-            <table className="table">
-        <thead>
+  return (
+    <div>
+      {teamDetails.map((teamdetail) => {
+        //console.log(teamdetail);
+        return (
+          <ul key={teamdetail.teamId}>
+            <li>Country: {teamdetail.Constructor.nationality}</li>
+            <li>Position: {teamdetail.Constructors[0].name}</li>
+            <li>Points: {teamdetail.Constructor.points}</li>
+            <li>History: </li>
+          </ul>
+        );
+      })}
+   
+        <table>
+          <thead>
             <th>Round</th>
             <th>Grand Prix</th>
-            <th>Vettel</th>
-            <th>Veber</th>
+            <th>{teamResults[0].Results[0].Driver.familyName}</th>
+            <th>{teamResults[0].Results[1].Driver.familyName}</th>
             <th>Points</th>
-        </thead>
-        <tbody>
-          {teamDetails.map((teamdetail, i) => {
-            console.log(teamdetail);
-            return (
-              <tr key={i}>
-                <td>{teamdetail.position}</td>
-                <td>{teamdetail.Constructor.name}</td>
-                <td><a href={teamdetail.Constructor.url} target="_blank">Details</a></td>
-            <td>{teamdetail.points}</td>
-              </tr>
-            );
-          })}
-
-          {teamResults.map((teamresult, i) => {
-            console.log(teamresult);
-            return (
-              <tr key={i}>
-                {/* <td>{teamdetail.position}</td>
-                <td>{teamdetail.Constructor.name}</td>
-                <td><a href={teamdetail.Constructor.url} target="_blank">Details</a></td>
-                <td>{teamdetail.points}</td> */}
-              </tr>
-            );
-          })}
-</tbody>
-</table>
+          </thead>
+          <tbody>
+            {teamResults.map((teamresult) => {
+              console.log('teamresults', teamresult);
+                return (
+                  
+                    <tr key={teamresult.teamId}>
+                    <td>{teamresult.round}</td>
+                    <td>{teamresult.raceName}</td>
+                    <td>{teamresult.Results[0].position}</td>
+                    <td>{teamresult.Results[1].position}</td>
+                    <td>{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
+                  </tr>
+                  
+              );
+            })}
+          </tbody>
+        </table>
         </div>
-
-    );
+  );
 }
+
+
+
+
+
+       
