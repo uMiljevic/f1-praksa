@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Flag from 'react-flagkit';
+
 
 export default function Drivers() {
     const [driverDetails, setDriverDetails] = useState([]);
@@ -23,7 +25,6 @@ export default function Drivers() {
         console.log(responseDetails);
         setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDriverResults(responeseResults.data.MRData.RaceTable.Races);
-
     }
 
     // console.log(responeseResults);
@@ -31,18 +32,32 @@ export default function Drivers() {
         <div>
             {driverDetails.map((detail) => {
                 return (
-                    <ul key={detail.Driver.driverId}>
-                        <li>Country: {detail.Driver.nationality} </li>
-                        <li>Team: {detail.Constructors[0].name} </li>
-                        <li>Birth: {detail.Driver.dateOfBirth} </li>
-                        <li>Biography: </li>
-                    </ul>
-
+                    <div>
+                        <div>
+                            <h3>{detail.Driver.givenName + " " + detail.Driver.familyName}</h3>
+                        </div>
+                        <ul key={detail.Driver.driverId}>
+                            <li>Country: {detail.Driver.nationality} </li>
+                            <li>Team: {detail.Constructors[0].name} </li>
+                            <li>Birth: {detail.Driver.dateOfBirth} </li>
+                            <li>Biography: </li>
+                        </ul>
+                    </div>
                 );
             })}
 
             <table className="table">
                 <tbody>
+                <h3>Formula 1 2013 Results</h3>
+                <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Grand Prix</th>
+                    <th>Team</th>
+                    <th>Grid</th>
+                    <th>Race</th>
+                </tr>
+            </thead>
                     {driverResults.map((results) => {
                         return (
                             <div>
