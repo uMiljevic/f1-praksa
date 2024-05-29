@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
+import { getAlphaCode } from "../Utils.js";
 
-export default function RaceDetails() {
+export default function RaceDetails(props) {
     const [raceQualifiers, setRaceQualifiers] = useState([]);
     const [raceResults, setRaceResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -66,12 +67,12 @@ export default function RaceDetails() {
                 <tbody>
                     <tr>
                         {raceQualifiers.map((qualifier) => {
-                            console.log(qualifier);
+                            console.log("rrrrrr",qualifier);
                             return (
 
                                 <tr key={qualifier.position}>
                                     <td>{qualifier.position}</td>
-                                    <td>{qualifier.Driver.familyName} </td>
+                                    <td><Flag Driver={getAlphaCode(props.flags, qualifier.Constructor.nationality)} size={40} />{qualifier.Driver.familyName} </td>
                                     <td>{qualifier.Constructor.constructorId} </td>
                                     <td>{getBestTimes(qualifier)} </td>
                                     
@@ -103,7 +104,7 @@ export default function RaceDetails() {
 
                                 <tr key={result.raceName}>
                                     <td>{result.position} </td>
-                                    <td>{result.Driver.familyName} </td>
+                                    <td><Flag country={getAlphaCode(props.flags, result.Driver.familyName)} size={40} /> </td>
                                     <td>{result.Constructor.constructorId} </td>
                                     <td>{result.Time ? result.Time.time : ""}  </td>
                                     <td>{result.points}  </td>
