@@ -5,9 +5,9 @@ export default function Home(){
         <div className="main-home-container">
 
             
-            <div className="title">
+            
             <h1>Welcome to the F1 Feeder</h1>
-            </div>
+            
 
         </div>
     );
