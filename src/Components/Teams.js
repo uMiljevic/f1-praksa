@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Flag from 'react-flagkit';
+import { getAlphaCode } from "../Utils.js";
 
-export default function App() {
+export default function App(props) {
   const [teams, setTeams] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getTeams();
@@ -15,12 +18,21 @@ export default function App() {
     const response = await axios.get(urlAllteams);
     console.log(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
     setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+    setIsLoading(false);
   }
 
   const handleGetTeamDetails = (constructorId) => {
     const linkTo = `/teamDetails/${constructorId}`;
     navigate (linkTo);
   };
+
+  
+
+  if (isLoading) {
+    return (<h1>Loading...</h1>);
+  }
+
+console.log(props);
 
   return (
     <div className="teams">
