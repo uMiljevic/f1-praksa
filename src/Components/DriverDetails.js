@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-
+import { ExportOutlined } from "@ant-design/icons";
 
 export default function Drivers() {
     const [driverDetails, setDriverDetails] = useState([]);
     const [driverResults, setDriverResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const params = useParams();
 
     useEffect(() => {
@@ -25,7 +26,12 @@ export default function Drivers() {
         console.log(responseDetails);
         setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDriverResults(responeseResults.data.MRData.RaceTable.Races);
+
+        setIsLoading(false);
     }
+    if (isLoading) {
+        return (<h1>Loading...</h1>);
+      }
 
     // console.log(responeseResults);
     return (
@@ -40,7 +46,7 @@ export default function Drivers() {
                             <li>Country: {detail.Driver.nationality} </li>
                             <li>Team: {detail.Constructors[0].name} </li>
                             <li>Birth: {detail.Driver.dateOfBirth} </li>
-                            <li>Biography: <a href={detail.Driver.url} target="_Blanc">Icon</a> </li>
+                            <li><a href={detail.Driver.url} target="_Blanc">Biography <ExportOutlined /></a> </li>
                         </ul>
                     </div>
                 );
