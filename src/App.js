@@ -8,10 +8,13 @@ import Races from "./Components/Races";
 import Teams from "./Components/Teams";
 import React from "react";
 import Logo from "./images/f1 logo.png";
-
-
+import { Input, Space } from 'antd';
 
 function App() {
+  
+  const { Search } = Input;
+  const onSearch = (value, _e, info) => console.log(info?.source, value);
+
   return (
     <div className="main-container">
 
@@ -19,14 +22,13 @@ function App() {
         <nav className="nav-bar">
 
           <div className="nav-img">
+            <Link to="/">
             <img src={Logo} alt="F1 Logo" />
+            </Link>
           </div>
 
           <div className="list-container">
             <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
               <li>
                 <Link to="/drivers">Drivers</Link>
               </li>
@@ -49,9 +51,18 @@ function App() {
           </div>
 
           <div className="search">
-            <input type="text" placeholder="Search" />
+            {/* <input type="text" placeholder="Search" /> */}
+            <Space direction="vertical">
+              <Search
+                placeholder="Search"
+                onSearch={onSearch}
+                style={{
+                  width: 200,
+                }}
+              />
+              </Space>
           </div>
-          
+
         </nav>
 
         <Routes>
