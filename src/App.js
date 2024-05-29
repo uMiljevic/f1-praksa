@@ -16,17 +16,17 @@ function App() {
 
   const { Search } = Input;
   const onSearch = (value, _e, info) => console.log(info?.source, value);
-  const [flag, setFlag] = useState([]);
+  const [flags, setFlags] = useState([]);
 
   useEffect(()=>{
-    getFlag();
+    getFlags();
   }, []);
 
-  const getFlag = async () => {
-    const urlFlag = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
-    const response = await axios.get(urlFlag);
+  const getFlags = async () => {
+    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
+    const response = await axios.get(urlFlags);
     console.log('flag', response.data);
-    setFlag(response.data);
+    setFlags(response.data);
   };
 
   return (
@@ -81,13 +81,13 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home />} flags={flag}/>
-          <Route path="/drivers" element={<Drivers />} flags={flag}/>
-          <Route path="/teams" element={<Teams />} flags={flag}/>
-          <Route path="/races" element={<Races />} flags={flag}/>
-          <Route path="/driverDetails/:driverId" element={<DriverDetails />} flags={flag}/>
-          <Route path="/teamDetails/:teamId" element={<TeamDetails />} flags={flag}/>
-          <Route path="/raceDetails/:raceId" element={<RaceDetails />} flags={flag}/>
+          <Route path="/" element={<Home />} flags={flags}/>
+          <Route path="/drivers" element={<Drivers />} flags={flags}/>
+          <Route path="/teams" element={<Teams />} flags={flags}/>
+          <Route path="/races" element={<Races />} flags={flags}/>
+          <Route path="/driverDetails/:driverId" element={<DriverDetails />} flags={flags}/>
+          <Route path="/teamDetails/:teamId" element={<TeamDetails />} flags={flags}/>
+          <Route path="/raceDetails/:raceId" element={<RaceDetails />} flags={flags}/>
         </Routes>
       </Router>
     </div>
