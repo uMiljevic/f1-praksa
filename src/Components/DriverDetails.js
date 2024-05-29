@@ -3,8 +3,9 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { ExportOutlined } from "@ant-design/icons";
+import { getAlphaCode } from "../Utils.js";
 
-export default function Drivers() {
+export default function Drivers(props) {
     const [driverDetails, setDriverDetails] = useState([]);
     const [driverResults, setDriverResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,7 @@ export default function Drivers() {
         const responseDetails = await axios.get(urlStandings);
         const responeseResults = await axios.get(urlResults);
 
-        console.log(responseDetails);
+        console.log(responeseResults);
         setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDriverResults(responeseResults.data.MRData.RaceTable.Races);
 
@@ -33,7 +34,7 @@ export default function Drivers() {
         return (<h1>Loading...</h1>);
       }
 
-    // console.log(responeseResults);
+    
     return (
         <div>
             {driverDetails.map((detail) => {
@@ -69,7 +70,7 @@ export default function Drivers() {
                             <div>
                                 <tr key={results.driverId}>
                                     <td> {results.round} </td>
-                                    <td> {results.raceName} </td>
+                                    <td><Flag country = {getAlphaCode(props.flags, results.Circuit.Location.country)} size={40}/>{results.raceName}</td>
                                     <td> {results.Results[0].Constructor.name} </td>
                                     <td> {results.Results[0].grid} </td>
                                     <td> {results.Results[0].position} </td>

@@ -43,19 +43,19 @@ export default function TeamDetails() {
     <div>
       <div>
       {teamDetails.map((teamdetail) => {
-        console.log("teamdetail", teamdetail);
+        console.log("teamDetail", teamdetail);
         return (
           <ul key={teamdetail.Constructor.teamId}>
             <li>Country: {teamdetail.Constructor[0].nationality}</li>
-            <li>Position: {teamdetail.Constructor[0].position}</li>
-            <li>Points: {teamdetail.Constructor[0].points}</li>
-            <li>History: {teamdetail.Constructor[0].url} </li>
+            <li>Position: {teamdetail.Constructor.position}</li>
+            <li>Points: {teamdetail.Constructor.points}</li>
+            <li>History: {teamdetail.Constructor.url} </li>
           </ul>
         );
       })}
       </div>
-   
-        <table>
+      <h2>Formula 1 2013 Results</h2>
+      <table>
           <thead>
             <th>Round</th>
             <th>Grand Prix</th>
@@ -65,7 +65,7 @@ export default function TeamDetails() {
           </thead>
           <tbody>
             {teamResults.map((teamresult) => {
-              //console.log('teamresults', teamresult);
+              //console.log('teamresults', teamresults);
                 return (
                   
                     <tr key={teamresult.teamId}>

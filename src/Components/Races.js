@@ -55,8 +55,8 @@ export default function Races(props) {
                         return (
                             <tr >
                                 <td>{race.round}</td>
-                                <td onClick={() => handleClickGetRaces(race.round)}>{race.raceName}</td>
-                                <td><Flag country={getAlphaCode(props.flags, race.Circuit.Location.country)} size={40} /></td>
+                                <td onClick={() => handleClickGetRaces(race.round)}><Flag country={getAlphaCode(props.flags, race.Circuit.Location.country)} size={40} />{race.raceName}</td>
+                                <td>{race.Circuit.circuitName}</td>
                                 <td>{race.date}</td>
                                 <td>{race.Results[0].Driver.familyName}</td>
                             </tr>
