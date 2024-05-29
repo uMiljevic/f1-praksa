@@ -41,17 +41,19 @@ export default function TeamDetails() {
 
   return (
     <div>
+      <div>
       {teamDetails.map((teamdetail) => {
-        //console.log(teamdetail);
+        console.log("teamdetail", teamdetail);
         return (
-          <ul key={teamdetail.teamId}>
-            <li>Country: {teamdetail.Constructor.nationality}</li>
-            <li>Position: {teamdetail.Constructors[0].name}</li>
-            <li>Points: {teamdetail.Constructor.points}</li>
-            <li>History: </li>
+          <ul key={teamdetail.Constructor.teamId}>
+            <li>Country: {teamdetail.Constructor[0].nationality}</li>
+            <li>Position: {teamdetail.Constructor[0].position}</li>
+            <li>Points: {teamdetail.Constructor[0].points}</li>
+            <li>History: {teamdetail.Constructor[0].url} </li>
           </ul>
         );
       })}
+      </div>
    
         <table>
           <thead>
@@ -63,7 +65,7 @@ export default function TeamDetails() {
           </thead>
           <tbody>
             {teamResults.map((teamresult) => {
-              console.log('teamresults', teamresult);
+              //console.log('teamresults', teamresult);
                 return (
                   
                     <tr key={teamresult.teamId}>
