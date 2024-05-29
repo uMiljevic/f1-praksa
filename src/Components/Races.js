@@ -4,9 +4,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Flag from 'react-flagkit';
+import { getAlphaCode } from "../Utils.js";
 
-export default function Races() {
+export default function Races(props) {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
     const [allRaces, setAllRaces] = useState([]);
 
     useEffect(() => {
@@ -18,12 +20,20 @@ export default function Races() {
         const response = await axios.get(urlAllRaces);
         //console.log(response.data.MRData.RaceTable.Races);
         setAllRaces(response.data.MRData.RaceTable.Races);
+        setIsLoading(false);
     }
 
     const handleClickGetRaces = (raceId) => {
         const linkTo = `/raceDetails/${raceId}`;
         navigate(linkTo);
     };
+
+    if (isLoading) {
+        return (
+            <h1>Is loading...</h1>
+        )
+    }
+    console.log(props);
 
     return (
         <div>
@@ -46,7 +56,7 @@ export default function Races() {
                             <tr >
                                 <td>{race.round}</td>
                                 <td onClick={() => handleClickGetRaces(race.round)}>{race.raceName}</td>
-                                <td>{race.Circuit.circuitName}</td>
+                                <td><Flag country={getAlphaCode(props.flags, race.Circuit.Location.country)} size={40} /></td>
                                 <td>{race.date}</td>
                                 <td>{race.Results[0].Driver.familyName}</td>
                             </tr>
