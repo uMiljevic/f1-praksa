@@ -40,7 +40,7 @@ export default function Drivers() {
                             <li>Country: {detail.Driver.nationality} </li>
                             <li>Team: {detail.Constructors[0].name} </li>
                             <li>Birth: {detail.Driver.dateOfBirth} </li>
-                            <li>Biography: </li>
+                            <li>Biography: <a href={detail.Driver.url} target="_Blanc">Icon</a> </li>
                         </ul>
                     </div>
                 );
