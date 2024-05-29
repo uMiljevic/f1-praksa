@@ -6,27 +6,44 @@ import TeamDetails from "./Components/TeamDetails";
 import RaceDetails from "./Components/RaceDetails";
 import Races from "./Components/Races";
 import Teams from "./Components/Teams";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "./images/f1 logo.png";
-
+import { Input, Space } from 'antd';
+import axios from "axios";
 
 
 function App() {
+
+  const { Search } = Input;
+  const onSearch = (value, _e, info) => console.log(info?.source, value);
+  const [flags, setFlags] = useState([]);
+
+  useEffect(()=>{
+    getFlags();
+  }, []);
+
+  const getFlags = async () => {
+    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
+    const response = await axios.get(urlFlags);
+    console.log('flag', response.data);
+    setFlags(response.data);
+  };
+
   return (
     <div className="main-container">
+      
 
       <Router>
         <nav className="nav-bar">
 
           <div className="nav-img">
+            <Link to="/">
             <img src={Logo} alt="F1 Logo" />
+            </Link>
           </div>
 
           <div className="list-container">
             <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
               <li>
                 <Link to="/drivers">Drivers</Link>
               </li>
@@ -49,19 +66,28 @@ function App() {
           </div>
 
           <div className="search">
-            <input type="text" placeholder="Search" />
+            {/* <input type="text" placeholder="Search" /> */}
+            <Space direction="vertical">
+              <Search
+                placeholder="Search"
+                onSearch={onSearch}
+                style={{
+                  width: 200,
+                }}
+              />
+              </Space>
           </div>
-          
+
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/drivers" element={<Drivers />} />
-          <Route path="/teams" element={<Teams />} />
-          <Route path="/races" element={<Races />} />
-          <Route path="/driverDetails/:driverId" element={<DriverDetails />} />
-          <Route path="/teamDetails/:teamId" element={<TeamDetails />} />
-          <Route path="/raceDetails/:raceId" element={<RaceDetails />} />
+          <Route path="/" element={<Home />} flags={flags}/>
+          <Route path="/drivers" element={<Drivers />} flags={flags}/>
+          <Route path="/teams" element={<Teams />} flags={flags}/>
+          <Route path="/races" element={<Races />} flags={flags}/>
+          <Route path="/driverDetails/:driverId" element={<DriverDetails />} flags={flags}/>
+          <Route path="/teamDetails/:teamId" element={<TeamDetails />} flags={flags}/>
+          <Route path="/raceDetails/:raceId" element={<RaceDetails />} flags={flags}/>
         </Routes>
       </Router>
     </div>
