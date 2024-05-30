@@ -47,7 +47,7 @@ export default function TeamDetails(props) {
   return (
     <div>
       <div>
-      <img src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.jpg`} />
+      <img src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} />
       </div>
 
       <div>
