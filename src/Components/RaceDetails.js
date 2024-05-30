@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
+import { ExportOutlined } from "@ant-design/icons";
 import { getAlphaCode } from "../Utils.js";
 
 export default function RaceDetails(props) {
@@ -47,10 +48,11 @@ export default function RaceDetails(props) {
     return (
         <>
             <ul >
+                <li><Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={40} /></li>
                 <li>Country: {raceResults.Circuit.Location.country} </li>
                 <li>Location: {raceResults.Circuit.Location.locality} </li>
                 <li>Date: {raceResults.date} </li>
-                <li>Full report: <a href={raceResults.url} target="_Blanc">Icon</a></li>
+                <li>Full report: <a href={raceResults.url} target="_Blanc"><ExportOutlined /></a></li>
             </ul>
 
             <table className="table1">
@@ -72,7 +74,7 @@ export default function RaceDetails(props) {
 
                                 <tr key={qualifier.position}>
                                     <td>{qualifier.position}</td>
-                                    <td><Flag Driver={getAlphaCode(props.flags, qualifier.Constructor.nationality)} size={40} />{qualifier.Driver.familyName} </td>
+                                    <td><Flag country={getAlphaCode(props.flags, qualifier.Constructor.nationality)} size={40} />{qualifier.Driver.familyName} </td>
                                     <td>{qualifier.Constructor.constructorId} </td>
                                     <td>{getBestTimes(qualifier)} </td>
                                     
@@ -104,7 +106,7 @@ export default function RaceDetails(props) {
 
                                 <tr key={result.raceName}>
                                     <td>{result.position} </td>
-                                    <td><Flag country={getAlphaCode(props.flags, result.Driver.familyName)} size={40} /> </td>
+                                    <td><Flag country={getAlphaCode(props.flags, result.Driver.familyName)} size={40} />{result.Driver.familyName} </td>
                                     <td>{result.Constructor.constructorId} </td>
                                     <td>{result.Time ? result.Time.time : ""}  </td>
                                     <td>{result.points}  </td>
