@@ -5,6 +5,7 @@ import Flag from 'react-flagkit';
 import { ExportOutlined } from "@ant-design/icons";
 import { getAlphaCode } from "../Utils.js";
 
+
 export default function Drivers(props) {
     const [driverDetails, setDriverDetails] = useState([]);
     const [driverResults, setDriverResults] = useState([]);
@@ -34,16 +35,15 @@ export default function Drivers(props) {
     if (isLoading) {
         return (<h1>Loading...</h1>);
     }
-
     return (
-        <div>
+        <div className="main-container">
             <div>
-                <div>
+                <div className="driver-info">
                     <div><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
                     <div><Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} /></div>
                     <h3>{driverDetails.Driver.givenName + " " + driverDetails.Driver.familyName}</h3>
                 </div>
-                <ul>
+                <ul className="driver-details">
                     <li>Country: {driverDetails.Driver.nationality} </li>
                     <li>Team: {driverDetails.Constructors[0].name} </li>
                     <li>Birth: {driverDetails.Driver.dateOfBirth} </li>
@@ -51,7 +51,7 @@ export default function Drivers(props) {
                 </ul>
             </div>
 
-            <table className="table">
+            <table className="main-table">
                 <tbody>
                     <h3>Formula 1 2013 Results</h3>
                     <thead>
@@ -77,7 +77,6 @@ export default function Drivers(props) {
                         );
                     })}
                 </tbody>
-
             </table>
         </div>
     )
