@@ -35,7 +35,7 @@ export default function Races(props) {
         //return the item which contains the user input
         else {
             return el.raceName.toLowerCase().includes(inputText);
-            
+
         }
     });
 
@@ -54,18 +54,18 @@ export default function Races(props) {
     return (
         <div>
             <div className="search">
-            {/* <input type="text" placeholder="Search" /> */}
-            <Space direction="vertical">
-              <Search
-                placeholder="Search"
-                onChange={(e) => setInputText(e.target.value)}
-                style={{
-                  width: 200,
-                }}
-              />
-              </Space>
-          </div>
-            
+                {/* <input type="text" placeholder="Search" /> */}
+                <Space direction="vertical">
+                    <Search
+                        placeholder="Search"
+                        onChange={(e) => setInputText(e.target.value)}
+                        style={{
+                            width: 200,
+                        }}
+                    />
+                </Space>
+            </div>
+
             <h1>Race calendar 2013</h1>
             <table>
                 <thead>

@@ -42,7 +42,7 @@ export default function RaceDetails(props) {
     }
 
     const handleGoToDriverDetails = (driverId) => {
-        console.log("driver id", driverId);
+        //console.log("driver id", driverId);
         const linkTo = `/driverDetails/${driverId}`;
         navigate(linkTo);
     }
@@ -54,7 +54,7 @@ export default function RaceDetails(props) {
     }
 
     return (
-        <>
+        <div>
             <ul >
                 <li><Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={40} /></li>
                 <li>Country: {raceResults.Circuit.Location.country} </li>
@@ -71,7 +71,6 @@ export default function RaceDetails(props) {
                         <th>Driver</th>
                         <th>Team</th>
                         <th>Best Time</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -79,15 +78,12 @@ export default function RaceDetails(props) {
                         {raceQualifiers.map((qualifier, i) => {
                             //console.log("rrrrrr",qualifier);
                             return (
-
                                 <tr key={i}>
                                     <td>{qualifier.position}</td>
                                     <td onClick={() => handleGoToDriverDetails(qualifier.Driver.driverId)}><Flag country={getAlphaCode(props.flags, qualifier.Driver.nationality)} size={40} />{qualifier.Driver.familyName} </td>
                                     <td>{qualifier.Constructor.constructorId} </td>
                                     <td>{getBestTimes(qualifier)} </td>
-
                                 </tr>
-
                             );
                         })}
                     </tr>
@@ -123,6 +119,6 @@ export default function RaceDetails(props) {
             </table>
 
 
-        </>
+        </div>
     );
 }
