@@ -50,10 +50,10 @@ export default function Races(props) {
                 </thead>
 
                 <tbody>
-                    {allRaces.map((race) => {
+                    {allRaces.map((race, i) => {
                         //console.log(race);
                         return (
-                            <tr >
+                            <tr key={i}>
                                 <td>{race.round}</td>
                                 <td onClick={() => handleClickGetRaces(race.round)}><Flag country={getAlphaCode(props.flags, race.Circuit.Location.country)} size={40} />{race.raceName}</td>
                                 <td>{race.Circuit.circuitName}</td>
