@@ -41,8 +41,8 @@ export default function Drivers(props) {
                     return (
                         <tr key={driver.Driver.driverId}>
                             <td>{driver.position} </td>
-                            <td><Flag country = {getAlphaCode(props.flags, driver.Driver.nationality)} size={40} /></td>
                             <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)}>
+                            <Flag country = {getAlphaCode(props.flags, driver.Driver.nationality)} size={40} />
                             {driver.Driver.givenName + " " + driver.Driver.familyName} </td>
                             <td>{driver.Constructors[0].name} </td>
                             <td>{driver.points}  </td>
