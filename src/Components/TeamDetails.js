@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Flag from 'react-flagkit';
+import { getAlphaCode } from "../Utils.js";
 
-export default function TeamDetails() {
+export default function TeamDetails(props) {
   const [teamDetails, setTeamDetails] = useState([]);
   const [teamResults, setTeamResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +45,7 @@ export default function TeamDetails() {
     <div>
       <div>
       {teamDetails.map((teamdetail) => {
-        console.log("teamDetail", teamdetail);
+        //console.log("teamDetail", teamdetail);
         return (
           <ul key={teamdetail.Constructor.teamId}>
             <li>Country: {teamdetail.Constructor[0].nationality}</li>
@@ -65,12 +67,12 @@ export default function TeamDetails() {
           </thead>
           <tbody>
             {teamResults.map((teamresult) => {
-              //console.log('teamresults', teamresults);
+              console.log('teamresult', teamresult);
                 return (
                   
                     <tr key={teamresult.teamId}>
                     <td>{teamresult.round}</td>
-                    <td>{teamresult.raceName}</td>
+                    <td><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} />{teamresult.raceName}</td>
                     <td>{teamresult.Results[0].position}</td>
                     <td>{teamresult.Results[1].position}</td>
                     <td>{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
