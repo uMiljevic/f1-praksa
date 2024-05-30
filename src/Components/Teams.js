@@ -3,11 +3,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
+import { Input, Space } from 'antd';
 
 export default function App(props) {
   const [teams, setTeams] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [inputText, setInputText] = useState("");
+  const { Search } = Input;
 
   useEffect(() => {
     getTeams();
@@ -20,6 +23,18 @@ export default function App(props) {
     setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
     setIsLoading(false);
   }
+
+  const filteredData = teams.filter((el) => {
+    //if no input the return the original
+    if (inputText === '') {
+        return el;
+    }
+    //return the item which contains the user input
+    else {
+        return el.Constructor.constructorId.toLowerCase().includes(inputText);
+        
+    }
+});
 
   const handleGetTeamDetails = (constructorId) => {
     const linkTo = `/teamDetails/${constructorId}`;
@@ -35,7 +50,22 @@ export default function App(props) {
 console.log(props);
 
   return (
+    
     <div className="teams">
+
+        <div className="search">
+            {/* <input type="text" placeholder="Search" /> */}
+            <Space direction="vertical">
+              <Search
+                placeholder="Search"
+                onChange={(e) => setInputText(e.target.value)}
+                style={{
+                  width: 200,
+                }}
+              />
+              </Space>
+          </div>
+
       <h2>Constructors Championship Standings - 2013</h2>
       <table className="table">
         <thead>
@@ -45,7 +75,7 @@ console.log(props);
           <th>Points</th>
         </thead>
         <tbody>
-          {teams.map((team, i) => {
+          {filteredData.map((team, i) => {
             console.log('team',team);
             return (
               <tr key={i}>
