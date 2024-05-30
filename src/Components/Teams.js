@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { Input, Space } from 'antd';
+import { ExportOutlined } from "@ant-design/icons";
+
 
 export default function App(props) {
   const [teams, setTeams] = useState([]);
@@ -82,7 +84,7 @@ console.log(props);
                 <td>{team.position}</td>
                 <td onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
                   <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} />{team.Constructor.name}</td>
-                <td><a href={team.Constructor.url} target="_blank">Details</a></td>
+                <td><a href={team.Constructor.url} target="_blank">Details<ExportOutlined /></a></td>
                 <td>{team.points}</td>
               </tr>
             );
