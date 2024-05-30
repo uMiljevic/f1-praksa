@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { useNavigate } from "react-router-dom";
+import { ExportOutlined } from "@ant-design/icons";
 
 
 export default function TeamDetails(props) {
@@ -46,7 +47,7 @@ export default function TeamDetails(props) {
   return (
     <div>
       <div>
-     
+      <img src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.jpg`} />
       </div>
 
       <div>
@@ -57,7 +58,7 @@ export default function TeamDetails(props) {
         <li>Country: {teamDetails.ConstructorStandings[0].Constructor.nationality}</li>
         <li>Position: {teamDetails.ConstructorStandings[0].position}</li>
         <li>Points: {teamDetails.ConstructorStandings[0].points}</li>
-        <li>History: <a href={teamDetails.url} target="_Blanc" >Icon</a></li>
+        <li>History: <a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></li>
       </ul>
 
 
