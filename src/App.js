@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
 import Home from "./Components/Home";
 import Drivers from "./Components/Drivers";
 import DriverDetails from "./Components/DriverDetails";
@@ -11,14 +11,13 @@ import Logo from "./images/f1 logo.png";
 import { Input, Space } from 'antd';
 import axios from "axios";
 
-
 function App() {
 
   const { Search } = Input;
   const onSearch = (value, _e, info) => console.log(info?.source, value);
   const [flags, setFlags] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getFlags();
   }, []);
 
@@ -31,14 +30,12 @@ function App() {
 
   return (
     <div className="main-container">
-      
-
       <Router>
         <nav className="nav-bar">
 
           <div className="nav-img">
             <Link to="/">
-            <img src={Logo} alt="F1 Logo" />
+              <img src={Logo} alt="F1 Logo" />
             </Link>
           </div>
 
@@ -75,19 +72,18 @@ function App() {
                   width: 200,
                 }}
               />
-              </Space>
+            </Space>
           </div>
-
         </nav>
-
+              
         <Routes>
-          <Route path="/" element={<Home flags={flags}/>} />
-          <Route path="/drivers" element={<Drivers flags={flags}/>} />
-          <Route path="/teams" element={<Teams flags={flags}/>} />
-          <Route path="/races" element={<Races flags={flags}/>} />
-          <Route path="/driverDetails/:driverId" element={<DriverDetails flags={flags}/>} />
-          <Route path="/teamDetails/:teamId" element={<TeamDetails flags={flags}/>} />
-          <Route path="/raceDetails/:raceId" element={<RaceDetails flags={flags}/>} />
+          <Route path="/" element={<Home flags={flags} />} />
+          <Route path="/drivers" element={<Drivers flags={flags} />} />
+          <Route path="/teams" element={<Teams flags={flags} />} />
+          <Route path="/races" element={<Races flags={flags} />} />
+          <Route path="/driverDetails/:driverId" element={<DriverDetails flags={flags} />} />
+          <Route path="/teamDetails/:teamId" element={<TeamDetails flags={flags} />} />
+          <Route path="/raceDetails/:raceId" element={<RaceDetails flags={flags} />} />
         </Routes>
       </Router>
     </div>
