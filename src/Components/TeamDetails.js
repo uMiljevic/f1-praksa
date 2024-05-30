@@ -3,12 +3,16 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
+import { useNavigate } from "react-router-dom";
+
 
 export default function TeamDetails(props) {
   const [teamDetails, setTeamDetails] = useState([]);
   const [teamResults, setTeamResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     getTeamDetails();
@@ -41,6 +45,13 @@ export default function TeamDetails(props) {
 
   return (
     <div>
+      <div>
+     
+      </div>
+
+      <div>
+        <p><Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} /></p>
+      </div>
 
       <ul>
         <li>Country: {teamDetails.ConstructorStandings[0].Constructor.nationality}</li>
