@@ -25,15 +25,13 @@ export default function TeamDetails(props) {
     const urlTeamResults = `http://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
 
     const detailsResponse = await axios.get(urlTeamDetails);
-    // console.log("details", detailsResponse);
+    console.log("details", detailsResponse);
     const resultsResponse = await axios.get(urlTeamResults);
-    // console.log('results', resultsResponse.data.MRData.RaceTable.Races[0]);
+    //console.log('results', resultsResponse.data.MRData.RaceTable.Races[0]);
     // console.log('results', resultsResponse.data);
-    
-    // setTeamDetails(detailsResponse.data.MRData.StandingsTable.StandingsLists);
-    
-    setTeamResults(resultsResponse.data.MRData.RaceTable.Races);
 
+    setTeamDetails(detailsResponse.data.MRData.StandingsTable.StandingsLists[0]);
+    setTeamResults(resultsResponse.data.MRData.RaceTable.Races);
     setIsLoading(false);
   }
 
@@ -43,46 +41,42 @@ export default function TeamDetails(props) {
 
   return (
     <div>
-      <div>
-      {teamDetails.map((teamdetail) => {
-        //console.log("teamDetail", teamdetail);
-        return (
-          <ul key={teamdetail.Constructor.teamId}>
-            <li>Country: {teamdetail.Constructor[0].nationality}</li>
-            <li>Position: {teamdetail.Constructor.position}</li>
-            <li>Points: {teamdetail.Constructor.points}</li>
-            <li>History: {teamdetail.Constructor.url} </li>
-          </ul>
-        );
-      })}
-      </div>
+
+      <ul>
+        <li>Country: {teamDetails.ConstructorStandings[0].Constructor.nationality}</li>
+        <li>Position: {teamDetails.ConstructorStandings[0].position}</li>
+        <li>Points: {teamDetails.ConstructorStandings[0].points}</li>
+        <li>History: <a href={teamDetails.url} target="_Blanc" >Icon</a></li>
+      </ul>
+
+
+
       <h2>Formula 1 2013 Results</h2>
       <table>
-          <thead>
-            <th>Round</th>
-            <th>Grand Prix</th>
-            <th>{teamResults[0].Results[0].Driver.familyName}</th>
-            <th>{teamResults[0].Results[1].Driver.familyName}</th>
-            <th>Points</th>
-          </thead>
-          <tbody>
-            {teamResults.map((teamresult) => {
-              console.log('teamresult', teamresult);
-                return (
-                  
-                    <tr key={teamresult.teamId}>
-                    <td>{teamresult.round}</td>
-                    <td><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} />{teamresult.raceName}</td>
-                    <td>{teamresult.Results[0].position}</td>
-                    <td>{teamresult.Results[1].position}</td>
-                    <td>{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
-                  </tr>
-                  
-              );
-            })}
-          </tbody>
-        </table>
-        </div>
+        <thead>
+          <th>Round</th>
+          <th>Grand Prix</th>
+          <th>{teamResults[0].Results[0].Driver.familyName}</th>
+          <th>{teamResults[0].Results[1].Driver.familyName}</th>
+          <th>Points</th>
+        </thead>
+        <tbody>
+          {teamResults.map((teamresult) => {
+            //console.log('teamresult', teamresult);
+            return (
+              <tr key={teamresult.teamId}>
+                <td>{teamresult.round}</td>
+                <td><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} />{teamresult.raceName}</td>
+                <td>{teamresult.Results[0].position}</td>
+                <td>{teamresult.Results[1].position}</td>
+                <td>{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
+              </tr>
+
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -90,4 +84,3 @@ export default function TeamDetails(props) {
 
 
 
-       
