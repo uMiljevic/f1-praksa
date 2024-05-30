@@ -33,7 +33,7 @@ export default function Races(props) {
             <h1>Is loading...</h1>
         )
     }
-    console.log(props);
+    //console.log(props);
 
     return (
         <div>
@@ -51,7 +51,7 @@ export default function Races(props) {
 
                 <tbody>
                     {allRaces.map((race) => {
-                        console.log(race);
+                        //console.log(race);
                         return (
                             <tr >
                                 <td>{race.round}</td>
