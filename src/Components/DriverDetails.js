@@ -11,10 +11,10 @@ export default function Drivers(props) {
     const [isLoading, setIsLoading] = useState(true);
     const params = useParams();
 
+
     useEffect(() => {
         getDriverDetails();
     }, []);
-
 
     const getDriverDetails = async () => {
         const driverId = params.driverId;
@@ -24,54 +24,51 @@ export default function Drivers(props) {
         const responseDetails = await axios.get(urlStandings);
         const responeseResults = await axios.get(urlResults);
 
-        console.log(responeseResults);
-        setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        console.log(responseDetails);
+        setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
         setDriverResults(responeseResults.data.MRData.RaceTable.Races);
 
         setIsLoading(false);
     }
+
     if (isLoading) {
         return (<h1>Loading...</h1>);
-      }
-      
+    }
+
     return (
         <div>
-            {driverDetails.map((detail) => {
-                return (
-                    <div>
-                        <div>
-                            <div><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
-                            <div><Flag country = {getAlphaCode(props.flags, detail.Driver.nationality)} size={50} /></div>
-                            <h3>{detail.Driver.givenName + " " + detail.Driver.familyName}</h3>
-                        </div>
-                        <ul key={detail.Driver.driverId}>
-                            <li>Country: {detail.Driver.nationality} </li>
-                            <li>Team: {detail.Constructors[0].name} </li>
-                            <li>Birth: {detail.Driver.dateOfBirth} </li>
-                            <li><a href={detail.Driver.url} target="_Blanc">Biography <ExportOutlined /></a> </li>
-                        </ul>
-                    </div>
-                );
-            })}
+            <div>
+                <div>
+                    <div><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
+                    <div><Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} /></div>
+                    <h3>{driverDetails.Driver.givenName + " " + driverDetails.Driver.familyName}</h3>
+                </div>
+                <ul>
+                    <li>Country: {driverDetails.Driver.nationality} </li>
+                    <li>Team: {driverDetails.Constructors[0].name} </li>
+                    <li>Birth: {driverDetails.Driver.dateOfBirth} </li>
+                    <li><a href={driverDetails.Driver.url} target="_Blanc">Biography <ExportOutlined /></a> </li>
+                </ul>
+            </div>
 
             <table className="table">
                 <tbody>
-                <h3>Formula 1 2013 Results</h3>
-                <thead>
-                <tr>
-                    <th>Round</th>
-                    <th>Grand Prix</th>
-                    <th>Team</th>
-                    <th>Grid</th>
-                    <th>Race</th>
-                </tr>
-            </thead>
+                    <h3>Formula 1 2013 Results</h3>
+                    <thead>
+                        <tr>
+                            <th>Round</th>
+                            <th>Grand Prix</th>
+                            <th>Team</th>
+                            <th>Grid</th>
+                            <th>Race</th>
+                        </tr>
+                    </thead>
                     {driverResults.map((results) => {
                         return (
                             <div>
                                 <tr key={results.driverId}>
                                     <td> {results.round} </td>
-                                    <td><Flag country = {getAlphaCode(props.flags, results.Circuit.Location.country)} size={40}/>{results.raceName}</td>
+                                    <td><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} />{results.raceName}</td>
                                     <td> {results.Results[0].Constructor.name} </td>
                                     <td> {results.Results[0].grid} </td>
                                     <td> {results.Results[0].position} </td>
