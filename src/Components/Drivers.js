@@ -12,7 +12,7 @@ export default function Drivers(props) {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const { Search } = Input;
-    const [inputText, setInputText] = useState ("")
+    const [inputText, setInputText] = useState("")
 
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function Drivers(props) {
 
     const getDrivers = async () => {
         const url = "http://ergast.com/api/f1/2013/driverStandings.json";
-        const response = await axios.get(url);        
+        const response = await axios.get(url);
         console.log(response.data.MRData.StandingsTable.StandingsLists[0]);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setIsLoading(false);
@@ -30,14 +30,16 @@ export default function Drivers(props) {
     const handleClickDriverDetails = (driverId) => {
         console.log("driver id", driverId);
         const linkTo = `/driverDetails/${driverId}`;
-        navigate(linkTo); 
+        navigate(linkTo);
     }
 
     const filteredData = drivers.filter((el) => {
         if (inputText === '') {
             return el;
         } else {
-            return el.Driver.familyName.toLowerCase().includes(inputText);
+            return el.Driver.familyName.toLowerCase().includes(inputText)
+            ||
+            el.Driver.givenName.toLowerCase().includes(inputText);
 
         }
     });
@@ -48,38 +50,46 @@ export default function Drivers(props) {
 
     // console.log("a", filteredData);
     return (
-        <div>
+        <div className="main-driver-container">
             <div className="search">
                 <Space direction="vertical">
                     <Search
                         placeholder="Search"
                         value={inputText}
                         onChange={(e) => setInputText(e.target.value)}
-                        label = "Search"
+                        label="Search"
                         style={{
                             width: 200,
                         }}
                     />
                 </Space>
             </div>
+            <div className="table-scroll">
             <table className="main-table">
+                <thead>
+                    <th colSpan={4}>Drivers Championship Standings - 2013</th>
+                </thead>
                 <tbody>
-                    <h3>Drivers Championship Standings - 2013</h3>
+
                     {filteredData.map((driver) => {
                         return (
+
                             <tr key={driver.Driver.driverId}>
-                                <td>{driver.position} </td>
-                                <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)}>
-                                    <Flag country={getAlphaCode(props.flags, driver.Driver.nationality)} size={40} />
-                                    {driver.Driver.givenName + " " + driver.Driver.familyName} </td>
-                                <td>{driver.Constructors[0].name} </td>
-                                <td>{driver.points}  </td>
+                                <td className="td-driver">{driver.position} </td>
+                                <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)} className="td-driver2">
+                                    <Flag country={getAlphaCode(props.flags, driver.Driver.nationality)} size={40} className="flag" />
+                                    {driver.Driver.givenName + " " + driver.Driver.familyName}
+                                </td>
+                                <td className="td-driver3">{driver.Constructors[0].name} </td>
+                                <td className="td-driver">{driver.points}  </td>
                             </tr>
+
                         );
                     })}
 
                 </tbody>
             </table>
+            </div>
         </div>
 
     )
