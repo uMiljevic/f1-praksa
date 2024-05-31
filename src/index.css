@@ -81,11 +81,34 @@ body{
 
 /* Tables CSS */
 
+/* Round Corners */
+table th:first-child {
+  border-radius: 10px 0 0 0 !important;
+}
+table th:last-child {
+  border-radius: 0 10px 0 0 !important;
+}
+table tr:last-child td:first-child {
+  border-radius: 0 0 0 10px !important;
+}
+table tr:last-child td:last-child {
+  border-radius: 0 0 10px 0 !important;
+}
+/* Round Corners */
+
 .main-driver-container{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.main-table tbody tr:nth-child(even):hover{
+  background-color: hsl(218, 11%, 66%, 65%);
+}
+
+.main-table tbody tr:nth-child(odd):hover{
+  background-color: hsl(218, 11%, 66%, 5%);
 }
 
 /* Scroll Bar Css */
@@ -103,6 +126,7 @@ body{
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: hsl(0, 6%, 19%, 50%);
+  border-radius: 0 5px 5px 0;
 }
 
 /* Handle on hover */
@@ -111,9 +135,13 @@ body{
 }
 
 .table-scroll{
-  height: 80vh;
+  height: 70vh;
   overflow-y: auto;
   width: 70%;
+}
+
+.table-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .table-scroll > .main-table{
@@ -161,5 +189,40 @@ body{
 .flag{
   margin-right: 5px;
 }
+
+/* Races CSS */
+
+.main-races-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.above-table-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+}
+
+.main-table th{
+  text-align: left;
+  padding-left: 5px;
+  font-size: 20px;
+}
+
+.td-race-position{
+  width: 10%;
+  text-align: center;
+}
+
+.td-race-track{
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 
 
