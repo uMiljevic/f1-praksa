@@ -38,8 +38,8 @@ export default function Drivers(props) {
             return el;
         } else {
             return el.Driver.familyName.toLowerCase().includes(inputText)
-            ||
-            el.Driver.givenName.toLowerCase().includes(inputText);
+                ||
+                el.Driver.givenName.toLowerCase().includes(inputText);
 
         }
     });
@@ -64,31 +64,35 @@ export default function Drivers(props) {
                     />
                 </Space>
             </div>
+
+            <h1>Drivers Championship Standings - 2013</h1>
+
             <div className="table-scroll">
-            <table className="main-table">
-                <thead>
-                    <th colSpan={4}>Drivers Championship Standings - 2013</th>
-                </thead>
-                <tbody>
+                <table className="main-table">
+                    <thead>
+                        <th>Position</th>
+                        <th>Driver</th>
+                        <th>Team</th>
+                        <th>Points</th>
+                    </thead>
+                    <tbody>
 
-                    {filteredData.map((driver) => {
-                        return (
+                        {filteredData.map((driver) => {
+                            return (
+                                <tr key={driver.Driver.driverId}>
+                                    <td className="td-driver">{driver.position} </td>
+                                    <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)} className="td-driver2">
+                                        <Flag country={getAlphaCode(props.flags, driver.Driver.nationality)} size={40} className="flag" />
+                                        {driver.Driver.givenName + " " + driver.Driver.familyName}
+                                    </td>
+                                    <td className="td-driver3">{driver.Constructors[0].name} </td>
+                                    <td className="td-driver">{driver.points}  </td>
+                                </tr>
 
-                            <tr key={driver.Driver.driverId}>
-                                <td className="td-driver">{driver.position} </td>
-                                <td onClick={() => handleClickDriverDetails(driver.Driver.driverId)} className="td-driver2">
-                                    <Flag country={getAlphaCode(props.flags, driver.Driver.nationality)} size={40} className="flag" />
-                                    {driver.Driver.givenName + " " + driver.Driver.familyName}
-                                </td>
-                                <td className="td-driver3">{driver.Constructors[0].name} </td>
-                                <td className="td-driver">{driver.points}  </td>
-                            </tr>
-
-                        );
-                    })}
-
-                </tbody>
-            </table>
+                            );
+                        })}
+                    </tbody>
+                </table>
             </div>
         </div>
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -5,6 +6,7 @@ import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { Input, Space } from 'antd';
 import { ExportOutlined } from "@ant-design/icons";
+
 
 
 export default function App(props) {
@@ -21,7 +23,7 @@ export default function App(props) {
   const getTeams = async () => {
     const urlAllteams = "http://ergast.com/api/f1/2013/constructorStandings.json";
     const response = await axios.get(urlAllteams);
-    console.log(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+    //console.log(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
     setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
     setIsLoading(false);
   }
@@ -29,70 +31,65 @@ export default function App(props) {
   const filteredData = teams.filter((el) => {
     //if no input the return the original
     if (inputText === '') {
-        return el;
+      return el;
     }
     //return the item which contains the user input
     else {
-        return el.Constructor.constructorId.toLowerCase().includes(inputText);
-        
+      return el.Constructor.constructorId.toLowerCase().includes(inputText);
+
     }
-});
+  });
 
   const handleGetTeamDetails = (constructorId) => {
+    console.log("constructorId", constructorId);
     const linkTo = `/teamDetails/${constructorId}`;
-    navigate (linkTo);
+    navigate(linkTo);
   };
-
-  
 
   if (isLoading) {
     return (<h1>Loading...</h1>);
   }
 
-console.log(props);
+  console.log(props);
 
   return (
-    
-    <div className="teams">
 
-        <div className="search">
-            {/* <input type="text" placeholder="Search" /> */}
-            <Space direction="vertical">
-              <Search
-                placeholder="Search"
-                onChange={(e) => setInputText(e.target.value)}
-                style={{
-                  width: 200,
-                }}
-              />
-              </Space>
-          </div>
+    <div className="main-driver-container">
+      <div className="search">
+        {/* <input type="text" placeholder="Search" /> */}
+        <Space direction="vertical">
+          <Search
+            placeholder="Search"
+            onChange={(e) => setInputText(e.target.value)}
+            style={{
+              width: 200,
+            }}
+          />
+        </Space>
+      </div>
 
-      <h2>Constructors Championship Standings - 2013</h2>
-      <table className="table">
-        <thead>
-          <th>Position</th>
-          <th>Name</th>
-          <th>Details</th>
-          <th>Points</th>
-        </thead>
-        <tbody>
-          {filteredData.map((team, i) => {
-            console.log('team',team);
-            return (
-              <tr key={i}>
-                <td>{team.position}</td>
-                <td onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
-                  <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} />{team.Constructor.name}</td>
-                <td><a href={team.Constructor.url} target="_blank">Details<ExportOutlined /></a></td>
-                <td>{team.points}</td>
-              </tr>
-            );
-          })};
-        </tbody>
-      </table>
-
-
-    </div>
+      <h1>Constructors Championship</h1>
+      <div className="table-scroll">
+        <table className="main-table">
+          <thead>
+            <th colSpan={4}>Constructors Championship Standings - 2013</th>
+          </thead>
+          <tbody>
+            {filteredData.map((team, i) => {
+              console.log('team', team);
+              return (
+                <tr key={i}>
+                  <td className="td-position">{team.position}</td>
+                  <td className="td-nationality" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
+                    <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} />{team.Constructor.name}</td>
+                  <td className="td-team"><a href={team.Constructor.url} target="_blank">Details<ExportOutlined /></a></td>
+                  <td className="td-points">{team.points}</td>
+                </tr>
+              );
+            })};
+          </tbody>
+        </table>
+      </div>
+</div>
   );
 }

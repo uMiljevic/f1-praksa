@@ -44,8 +44,8 @@ export default function Drivers(props) {
         return (<h1>Loading...</h1>);
     }
     return (
-        <div className="main-container">
-            <div>
+        <div className="main-driver-container">
+            <div className="main-detail-menu">
                 <div className="info">
                     <div><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
                     <div><Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} /></div>
@@ -58,10 +58,9 @@ export default function Drivers(props) {
                     <li><a href={driverDetails.Driver.url} target="_Blanc">Biography <ExportOutlined /></a> </li>
                 </ul>
             </div>
-
-            <table className="main-table">
-                <tbody>
-                    <h3>Formula 1 2013 Results</h3>
+            <h3>Formula 1 2013 Results</h3>
+            <div className="table-scroll">
+                <table className="main-table">
                     <thead>
                         <tr>
                             <th>Round</th>
@@ -71,21 +70,25 @@ export default function Drivers(props) {
                             <th>Race</th>
                         </tr>
                     </thead>
-                    {driverResults.map((results) => {
-                        return (
-                            <div>
-                                <tr key={results.driverId}>
-                                    <td> {results.round} </td>
-                                    <td onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} />{results.raceName}</td>
-                                    <td> {results.Results[0].Constructor.name} </td>
-                                    <td> {results.Results[0].grid} </td>
-                                    <td> {results.Results[0].position} </td>
-                                </tr>
-                            </div>
-                        );
-                    })}
-                </tbody>
-            </table>
+                    <tbody>
+                        {driverResults.map((results) => {
+                            return (
+                                <div>
+                                    <tr key={results.driverId}>
+                                        <td className="td-driver"> {results.round} </td>
+                                        <td className="td-driver2" onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} className="flag" />{results.raceName}</td>
+                                        <td className="td-driver3"> {results.Results[0].Constructor.name} </td>
+                                        <td className="td-driver"> {results.Results[0].grid} </td>
+                                        <td className="td-driver-race"> {results.Results[0].position} </td>
+                                    </tr>
+                                </div>
+                            );
+                        })}
+                    </tbody>
+                </table>
+
+            </div>
+
         </div>
     )
 };
