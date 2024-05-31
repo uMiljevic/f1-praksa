@@ -78,3 +78,88 @@ body{
   left: 60%;
   transform: translate(-50%, -50%);
 }
+
+/* Tables CSS */
+
+.main-driver-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Scroll Bar Css */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #FBFBFB;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(0, 6%, 19%, 50%);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0, 6%, 19%, 70%);
+}
+
+.table-scroll{
+  height: 80vh;
+  overflow-y: auto;
+  width: 70%;
+}
+
+.table-scroll > .main-table{
+  width: 100%;
+}
+
+.main-table{
+  width: 70%;
+  /* border: 1px solid black; */
+  border-collapse: collapse;
+}
+
+.main-table tbody tr:nth-child(even){
+  background-color: hsl(218, 11%, 66%, 50%);
+}
+
+.main-table tr, td{
+  /* border: 1px solid black; */
+  border-collapse: collapse;
+  padding: 5px 15px;
+}
+
+
+.main-table th{
+  background-color: #3B71CA;
+  color: #FBFBFB;
+  height: 50px;
+  font-size: 24px;
+  position: sticky;
+  top: 0;
+}
+
+
+.td-driver{
+  width: 10%;
+  text-align: center;
+}
+
+.td-driver2{
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.flag{
+  margin-right: 5px;
+}
+
+
