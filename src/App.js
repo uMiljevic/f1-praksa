@@ -52,19 +52,6 @@ function App() {
               </li>
             </ul>
           </div>
-
-          <div className="search">
-            {/* <input type="text" placeholder="Search" /> */}
-            <Space direction="vertical">
-              <Search
-                placeholder="Search"
-                onSearch={onSearch}
-                style={{
-                  width: 200,
-                }}
-              />
-            </Space>
-          </div>
         </nav>
               
         <Routes>
