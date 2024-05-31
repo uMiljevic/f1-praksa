@@ -30,7 +30,7 @@ export default function TeamDetails(props) {
     const urlTeamResults = `http://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
 
     const detailsResponse = await axios.get(urlTeamDetails);
-    console.log("details", detailsResponse);
+    //console.log("details", detailsResponse);
     const resultsResponse = await axios.get(urlTeamResults);
     //console.log('results', resultsResponse.data.MRData.RaceTable.Races[0]);
     // console.log('results', resultsResponse.data);
@@ -46,15 +46,13 @@ export default function TeamDetails(props) {
 
   return (
     <div>
-      <div>
+      <div className="info">
       <img src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} />
+      <p><Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} /></p>
+      <p className="">{teamDetails.ConstructorStandings[0].Constructor.name}</p>
       </div>
 
-      <div>
-        <p><Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} /></p>
-      </div>
-
-      <ul>
+      <ul className="details">
         <li>Country: {teamDetails.ConstructorStandings[0].Constructor.nationality}</li>
         <li>Position: {teamDetails.ConstructorStandings[0].position}</li>
         <li>Points: {teamDetails.ConstructorStandings[0].points}</li>
