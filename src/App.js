@@ -50,15 +50,6 @@ function App() {
               <li>
                 <Link to="/races">Races</Link>
               </li>
-              <li>
-                <Link to="/driver/details">Driver Details</Link>
-              </li>
-              <li>
-                <Link to="/team/details">Team Details</Link>
-              </li>
-              <li>
-                <Link to="/race/details">Race Details</Link>
-              </li>
             </ul>
           </div>
 
