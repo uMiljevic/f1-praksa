@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-import { ExportOutlined } from "@ant-design/icons";
-import { getAlphaCode } from "../Utils.js"
+import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
+import { getAlphaCode, getPositionColor } from "../Utils.js"
 import { useNavigate } from "react-router-dom";
+
 
 
 export default function Drivers(props) {
@@ -41,7 +42,7 @@ export default function Drivers(props) {
 
 
     if (isLoading) {
-        return (<h1>Loading...</h1>);
+        return <LoadingOutlined />;
     }
     return (
         <div className="main-driver-container">
@@ -62,13 +63,11 @@ export default function Drivers(props) {
             <div className="table-scroll">
                 <table className="main-table">
                     <thead>
-                        <tr>
                             <th>Round</th>
                             <th>Grand Prix</th>
                             <th>Team</th>
                             <th>Grid</th>
                             <th>Race</th>
-                        </tr>
                     </thead>
                     <tbody>
                         {driverResults.map((results) => {
@@ -79,16 +78,14 @@ export default function Drivers(props) {
                                         <td className="td-driver2" onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} className="flag" />{results.raceName}</td>
                                         <td className="td-driver3"> {results.Results[0].Constructor.name} </td>
                                         <td className="td-driver"> {results.Results[0].grid} </td>
-                                        <td className="td-driver-race"> {results.Results[0].position} </td>
+                                        <td className="td-driver-race" style={{backgroundColor: (getPositionColor(results.Results[0].position))}}> {results.Results[0].position} </td>
                                     </tr>
                                 </div>
                             );
                         })}
                     </tbody>
                 </table>
-
             </div>
-
         </div>
     )
 };
