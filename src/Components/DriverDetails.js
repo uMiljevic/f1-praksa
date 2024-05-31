@@ -3,7 +3,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { ExportOutlined } from "@ant-design/icons";
-import { getAlphaCode } from "../Utils.js";
+import { getAlphaCode } from "../Utils.js"
+import { useNavigate } from "react-router-dom";
 
 
 export default function Drivers(props) {
@@ -11,6 +12,7 @@ export default function Drivers(props) {
     const [driverResults, setDriverResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const params = useParams();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -31,6 +33,12 @@ export default function Drivers(props) {
 
         setIsLoading(false);
     }
+
+    const handleClickGetRaces = (raceId) => {
+        const linkTo = `/raceDetails/${raceId}`;
+        navigate(linkTo);
+    };
+
 
     if (isLoading) {
         return (<h1>Loading...</h1>);
@@ -68,7 +76,7 @@ export default function Drivers(props) {
                             <div>
                                 <tr key={results.driverId}>
                                     <td> {results.round} </td>
-                                    <td><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} />{results.raceName}</td>
+                                    <td onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} />{results.raceName}</td>
                                     <td> {results.Results[0].Constructor.name} </td>
                                     <td> {results.Results[0].grid} </td>
                                     <td> {results.Results[0].position} </td>
