@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
 import { getAlphaCode, getPositionColor } from "../Utils.js"
 import { useNavigate } from "react-router-dom";
+import { ExportOutlined } from "@ant-design/icons";
+import Loader from "./Loader.js";
 
 
 
@@ -42,10 +43,12 @@ export default function DriverDetails(props) {
 
 
     if (isLoading) {
-        return <LoadingOutlined />;
+        return <Loader />;
     }
     return (
         <div className="main-driver-container-2">
+            <h1>Formula 1 2013 Results</h1>
+            <div className="Tables-position">
             <div className="main-detail-menu">
                 <div className="info-container">
                     <div className="img-driver"><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
@@ -75,7 +78,6 @@ export default function DriverDetails(props) {
                 </table>
             </div>
             <div className="table-scroll">
-                <h1>Formula 1 2013 Results</h1>
                 <table className="main-table">
                     <thead>
                         <th>Round</th>
@@ -98,6 +100,8 @@ export default function DriverDetails(props) {
                         })}
                     </tbody>
                 </table>
+            </div>
+
             </div>
         </div>
     )
