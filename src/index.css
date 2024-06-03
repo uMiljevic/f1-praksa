@@ -184,6 +184,7 @@ table tr:last-child td:last-child {
   border: none;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .flag{
