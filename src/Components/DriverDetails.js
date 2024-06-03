@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export default function Drivers(props) {
+export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState([]);
     const [driverResults, setDriverResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,42 +45,55 @@ export default function Drivers(props) {
         return <LoadingOutlined />;
     }
     return (
-        <div className="main-driver-container">
+        <div className="main-driver-container-2">
             <div className="main-detail-menu">
-                <div className="info">
-                    <div><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
-                    <div><Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} /></div>
-                    <h3>{driverDetails.Driver.givenName + " " + driverDetails.Driver.familyName}</h3>
+                <div className="info-container">
+                    <div className="img-driver"><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
+                    <div className="info">
+                        <Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} />
+                        <h3 className="driver-name">{driverDetails.Driver.givenName} </h3>
+                        <h3> {driverDetails.Driver.familyName}</h3>
+                    </div>
                 </div>
-                <ul className="details">
-                    <li>Country: {driverDetails.Driver.nationality} </li>
-                    <li>Team: {driverDetails.Constructors[0].name} </li>
-                    <li>Birth: {driverDetails.Driver.dateOfBirth} </li>
-                    <li><a href={driverDetails.Driver.url} target="_Blanc">Biography <ExportOutlined /></a> </li>
-                </ul>
+                <table className="details">
+                    <tr>
+                        <td>Country: </td>
+                        <td>{driverDetails.Driver.nationality}</td>
+                    </tr>
+                    <tr>
+                        <td>Team:</td>
+                        <td>{driverDetails.Constructors[0].name}</td>
+                    </tr>
+                    <tr>
+                        <td>Birth:</td>
+                        <td>{driverDetails.Driver.dateOfBirth}</td>
+                    </tr>
+                    <tr>
+                        <td>Biography:</td>
+                        <td><a href={driverDetails.Driver.url} target="_Blanc"> <ExportOutlined /></a></td>
+                    </tr>
+                </table>
             </div>
-            <h3>Formula 1 2013 Results</h3>
             <div className="table-scroll">
+                <h1>Formula 1 2013 Results</h1>
                 <table className="main-table">
                     <thead>
-                            <th>Round</th>
-                            <th>Grand Prix</th>
-                            <th>Team</th>
-                            <th>Grid</th>
-                            <th>Race</th>
+                        <th>Round</th>
+                        <th>Grand Prix</th>
+                        <th>Team</th>
+                        <th>Grid</th>
+                        <th>Race</th>
                     </thead>
                     <tbody>
                         {driverResults.map((results) => {
                             return (
-                                <div>
-                                    <tr key={results.driverId}>
-                                        <td className="td-driver"> {results.round} </td>
-                                        <td className="td-driver2" onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} className="flag" />{results.raceName}</td>
-                                        <td className="td-driver3"> {results.Results[0].Constructor.name} </td>
-                                        <td className="td-driver"> {results.Results[0].grid} </td>
-                                        <td className="td-driver-race" style={{backgroundColor: (getPositionColor(results.Results[0].position))}}> {results.Results[0].position} </td>
-                                    </tr>
-                                </div>
+                                <tr key={results.driverId}>
+                                    <td className="td-driver"> {results.round} </td>
+                                    <td className="td-driver2" onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} className="flag" />{results.raceName}</td>
+                                    <td className="td-driver3"> {results.Results[0].Constructor.name} </td>
+                                    <td className="td-driver"> {results.Results[0].grid} </td>
+                                    <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(results.Results[0].position)) }}> {results.Results[0].position} </td>
+                                </tr>
                             );
                         })}
                     </tbody>
