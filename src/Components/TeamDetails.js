@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-import { getAlphaCode } from "../Utils.js";
+import { getAlphaCode, getPositionColor } from "../Utils.js";
 import { useNavigate } from "react-router-dom";
-import { ExportOutlined } from "@ant-design/icons";
+import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
 
 
 export default function TeamDetails(props) {
@@ -41,51 +41,60 @@ export default function TeamDetails(props) {
   }
 
   if (isLoading) {
-    return (<h1>Loading...</h1>);
+    return <LoadingOutlined />;
   }
 
   return (
     <div>
-      <div className="info">
-      <img src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} />
-      <p><Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} /></p>
-      <p className="">{teamDetails.ConstructorStandings[0].Constructor.name}</p>
+      <div className="main-team-container">
+        <div className="main-team-detail-menu">
+          <img id="nameimg" src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} />
+          <div className="name">
+            <p><Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} /></p>
+            <p id="constructorname">{teamDetails.ConstructorStandings[0].Constructor.name}</p>
+          </div>
+        </div>
+
+        <table className="team-details">
+          
+          <tr>Country: {teamDetails.ConstructorStandings[0].Constructor.nationality}</tr>
+          <tr>Position: {teamDetails.ConstructorStandings[0].position}</tr>
+          <tr>Points: {teamDetails.ConstructorStandings[0].points}</tr>
+          <tr>History: <a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></tr>
+        </table>
       </div>
 
-      <ul className="details">
-        <li>Country: {teamDetails.ConstructorStandings[0].Constructor.nationality}</li>
-        <li>Position: {teamDetails.ConstructorStandings[0].position}</li>
-        <li>Points: {teamDetails.ConstructorStandings[0].points}</li>
-        <li>History: <a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></li>
-      </ul>
 
 
+      <h3 class="formularesults">Formula 1 2013 Results</h3>
+      <div className="table-scroll">
 
-      <h2>Formula 1 2013 Results</h2>
-      <table>
-        <thead>
-          <th>Round</th>
-          <th>Grand Prix</th>
-          <th>{teamResults[0].Results[0].Driver.familyName}</th>
-          <th>{teamResults[0].Results[1].Driver.familyName}</th>
-          <th>Points</th>
-        </thead>
-        <tbody>
-          {teamResults.map((teamresult) => {
-            //console.log('teamresult', teamresult);
-            return (
-              <tr key={teamresult.teamId}>
-                <td>{teamresult.round}</td>
-                <td><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} />{teamresult.raceName}</td>
-                <td>{teamresult.Results[0].position}</td>
-                <td>{teamresult.Results[1].position}</td>
-                <td>{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
-              </tr>
+        <table className="main-table" >
+          <thead>
 
-            );
-          })}
-        </tbody>
-      </table>
+            <th>Round</th>
+            <th>Grand Prix</th>
+            <th>{teamResults[0].Results[0].Driver.familyName}</th>
+            <th>{teamResults[0].Results[1].Driver.familyName}</th>
+            <th>Points</th>
+          </thead>
+          <tbody>
+            {teamResults.map((teamresult) => {
+              //console.log('teamresult', teamresult);
+              return (
+                <tr key={teamresult.teamId}>
+                  <td className="td-teams">{teamresult.round}</td>
+                  <td className="td-teams2"><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} />{teamresult.raceName}</td>
+                  <td className="td-teams3" style={{ backgroundColor: (getPositionColor(teamresult.Results[0].position)) }}>{teamresult.Results[0].position}</td>
+                  <td className="td-teams4" style={{ backgroundColor: (getPositionColor(teamresult.Results[1].position)) }}>{teamresult.Results[1].position}</td>
+                  <td className="td-teams-points">{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
+                </tr>
+
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

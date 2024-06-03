@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-import { ExportOutlined } from "@ant-design/icons";
+import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
 import { getAlphaCode, getPositionColor } from "../Utils.js"
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export default function RaceDetails(props) {
         const raceId = params.raceId;        
         const urlQualifiers = `https://ergast.com/api/f1/2013/${raceId}/qualifying.json`;
         const urlResults = `https://ergast.com/api/f1/2013/${raceId}/results.json`;
-        const qualifiersResponse = await axios.get(urlQualifiers);        
+        const qualifiersResponse = await axios.get(urlQualifiers);              
         const resultsResponse = await axios.get(urlResults);        
 
         setRaceQualifiers(qualifiersResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
@@ -44,19 +44,19 @@ export default function RaceDetails(props) {
 
     if (isLoading) {
         return (
-            <h1>Is loading...</h1>
+            <LoadingOutlined />
         )
     }
 
     return (
         <div className="table-scroll">
-            <ul >
-                <li><Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={40} /></li>
-                <li>Country: {raceResults.Circuit.Location.country} </li>
-                <li>Location: {raceResults.Circuit.Location.locality} </li>
-                <li>Date: {raceResults.date} </li>
-                <li>Full report: <a href={raceResults.url} target="_Self"><ExportOutlined /></a></li>
-            </ul>
+            < table className="main-table">
+                <tr><Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={120} /></tr>
+                <tr>Country: {raceResults.Circuit.Location.country} </tr>
+                <tr>Location: {raceResults.Circuit.Location.locality} </tr>
+                <tr>Date: {raceResults.date} </tr>
+                <tr>Full report: <a href={raceResults.url} target="_Self"><ExportOutlined /></a></tr>
+            </table>
 
             <table className="main-table">
                 <thead>
@@ -69,12 +69,12 @@ export default function RaceDetails(props) {
                     </tr>
                 </thead>
                 <tbody>                    
-                        {raceQualifiers.map((qualifier, i) => {                            
+                        {raceQualifiers.map((qualifier) => {                            
                             return (
-                                <tr key={i}>
+                                <tr key={qualifier.Driver.driverId}>
                                     <td className="td-driver">{qualifier.position}</td>
-                                    <td onClick={() => handleGoToDriverDetails(qualifier.Driver.driverId)} className="td-driver2"><Flag country={getAlphaCode(props.flags, qualifier.Driver.nationality)} size={40} />{qualifier.Driver.familyName} </td>
-                                    <td className="td-driver3">{qualifier.Constructor.constructorId} </td>
+                                    <td className="td-driver2" onClick={() => handleGoToDriverDetails(qualifier.Driver.driverId)} ><Flag country={getAlphaCode(props.flags, qualifier.Driver.nationality)} size={40} />{qualifier.Driver.familyName} </td>
+                                    <td className="td-driver3">{qualifier.Constructor.name} </td>
                                     <td className="td-driver">{getBestTimes(qualifier)} </td>
                                 </tr>
                             );
@@ -94,12 +94,12 @@ export default function RaceDetails(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {raceResults.Results.map((result, i) => {                        
+                    {raceResults.Results.map((result) => {                        
                         return (
-                            <tr key={i}>
+                            <tr key={result.Driver.driverId}>
                                 <td className="td-driver" >{result.position} </td>
                                 <td className="td-driver2" onClick={() => handleGoToDriverDetails(result.Driver.driverId)}><Flag country={getAlphaCode(props.flags, result.Driver.nationality)} size={40} />{result.Driver.familyName} </td>
-                                <td className="td-driver3">{result.Constructor.constructorId} </td>
+                                <td className="td-driver3">{result.Constructor.name} </td>
                                 <td className="td-driver4">{result.Time ? result.Time.time : ""}  </td>
                                 <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(result.position)) }}>{result.points}  </td>
                             </tr>

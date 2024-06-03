@@ -35,7 +35,7 @@ export function getAlphaCode(flags, value) {
         flag.nationality.toLowerCase() === value.toLowerCase()
     );
 
-    if(flagsData.length === 1) return flagsData[0].alpha_2_code;
+    if(flagsData.length) return flagsData[0].alpha_2_code;
     
     const allCountriesFlags = getAllCountries.filter(flag =>
         flag.en_short_name.toLowerCase() === value.toLowerCase()
@@ -50,34 +50,31 @@ export function getAlphaCode(flags, value) {
 
 
 export function getPositionColor(value) {
-    console.log('value', value);
-
-    
+    // console.log('value', value);
 
     switch(value){
         case "1":
-            return "green";
+            return "hsl(162, 73%, 46%, .2)";
         case "2":
-            return "yellow";
+            return "hsl(45, 100%, 51%, .2)";
         case "3":
-            return "red";
+            return "hsl(354, 70%, 54%, .2)";
         case "4": 
-            return "blue"
+            return "hsl(27, 98%, 54%, .2)"
         case "5":
-            return "purple";
+            return "hsl(27, 98%, 54%, .2)";
         case "6":
-            return "lightblue";
+            return "hsl(27, 98%, 54%, .2)";
         case "7":
-            return "lightgreen";
+            return "hsl(27, 98%, 54%, .2)";
         case "8": 
-            return "pink";
+            return "hsl(27, 98%, 54%, .2)";
         case "9":
-            return "lightpink";
+            return "hsl(27, 98%, 54%, .2)";
         case "10":
-            return "lightpurple";
+            return "hsl(27, 98%, 54%, .2)";
+
+        default: return "hsl(210, 11%, 71%, .2)";
     }
 
-    if(value > "10"){
-        return "grey";
-    }
 }
