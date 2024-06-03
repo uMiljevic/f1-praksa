@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { Input, Space } from 'antd';
-import { ExportOutlined } from "@ant-design/icons";
+import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
 
 
 
@@ -41,20 +41,20 @@ export default function App(props) {
   });
 
   const handleGetTeamDetails = (constructorId) => {
-    console.log("constructorId", constructorId);
+    //console.log("constructorId", constructorId);
     const linkTo = `/teamDetails/${constructorId}`;
     navigate(linkTo);
   };
 
   if (isLoading) {
-    return (<h1>Loading...</h1>);
+    return <LoadingOutlined />;
   }
 
-  console.log(props);
+  //console.log(props);
 
   return (
 
-    <div className="main-driver-container">
+    <div className="main-team-container">
       <div className="search">
         {/* <input type="text" placeholder="Search" /> */}
         <Space direction="vertical">
@@ -71,19 +71,19 @@ export default function App(props) {
       <h1>Constructors Championship</h1>
       <div className="table-scroll">
         <table className="main-table">
-          <thead>
-            <th colSpan={4}>Constructors Championship Standings - 2013</th>
+          <thead >
+            <th  colSpan={4}>Constructors Championship Standings - 2013</th>
           </thead>
           <tbody>
-            {filteredData.map((team, i) => {
-              console.log('team', team);
+            {filteredData.map((team)=> {
+              //console.log('team', team);
               return (
-                <tr key={i}>
-                  <td className="td-position">{team.position}</td>
-                  <td className="td-nationality" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
+                <tr key={team.teamId}>
+                  <td className="td-teams">{team.position}</td>
+                  <td className="td-teams2" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
                     <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} />{team.Constructor.name}</td>
-                  <td className="td-team"><a href={team.Constructor.url} target="_blank">Details<ExportOutlined /></a></td>
-                  <td className="td-points">{team.points}</td>
+                  <td className="td-teams3"><a href={team.Constructor.url} target="_blank" >Details<ExportOutlined /></a></td>
+                  <td className="td-teams-points">{team.points}</td>
                 </tr>
               );
             })};
