@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { Input, Space } from 'antd';
-import { LoadingOutlined } from "@ant-design/icons";
+import Loader from "./Loader.js";
 
 
 
@@ -46,7 +46,7 @@ export default function Drivers(props) {
     });
 
     if (isLoading) {
-        return <LoadingOutlined />;
+        return <Loader />;
     }
 
     // console.log("a", filteredData);
