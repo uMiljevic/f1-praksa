@@ -21,7 +21,7 @@ export default function RaceDetails(props) {
         const raceId = params.raceId;        
         const urlQualifiers = `https://ergast.com/api/f1/2013/${raceId}/qualifying.json`;
         const urlResults = `https://ergast.com/api/f1/2013/${raceId}/results.json`;
-        const qualifiersResponse = await axios.get(urlQualifiers);        
+        const qualifiersResponse = await axios.get(urlQualifiers);              
         const resultsResponse = await axios.get(urlResults);        
 
         setRaceQualifiers(qualifiersResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
@@ -69,12 +69,12 @@ export default function RaceDetails(props) {
                     </tr>
                 </thead>
                 <tbody>                    
-                        {raceQualifiers.map((qualifier, i) => {                            
+                        {raceQualifiers.map((qualifier) => {                            
                             return (
-                                <tr key={i}>
+                                <tr key={qualifier.Driver.driverId}>
                                     <td className="td-driver">{qualifier.position}</td>
-                                    <td onClick={() => handleGoToDriverDetails(qualifier.Driver.driverId)} className="td-driver2"><Flag country={getAlphaCode(props.flags, qualifier.Driver.nationality)} size={40} />{qualifier.Driver.familyName} </td>
-                                    <td className="td-driver3">{qualifier.Constructor.constructorId} </td>
+                                    <td className="td-driver2" onClick={() => handleGoToDriverDetails(qualifier.Driver.driverId)} ><Flag country={getAlphaCode(props.flags, qualifier.Driver.nationality)} size={40} />{qualifier.Driver.familyName} </td>
+                                    <td className="td-driver3">{qualifier.Constructor.name} </td>
                                     <td className="td-driver">{getBestTimes(qualifier)} </td>
                                 </tr>
                             );
@@ -94,12 +94,12 @@ export default function RaceDetails(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {raceResults.Results.map((result, i) => {                        
+                    {raceResults.Results.map((result) => {                        
                         return (
-                            <tr key={i}>
+                            <tr key={result.Driver.driverId}>
                                 <td className="td-driver" >{result.position} </td>
                                 <td className="td-driver2" onClick={() => handleGoToDriverDetails(result.Driver.driverId)}><Flag country={getAlphaCode(props.flags, result.Driver.nationality)} size={40} />{result.Driver.familyName} </td>
-                                <td className="td-driver3">{result.Constructor.constructorId} </td>
+                                <td className="td-driver3">{result.Constructor.name} </td>
                                 <td className="td-driver4">{result.Time ? result.Time.time : ""}  </td>
                                 <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(result.position)) }}>{result.points}  </td>
                             </tr>

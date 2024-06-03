@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
-import { Input, Space } from 'antd';
+import { Breadcrumb, Input, Space } from 'antd';
 import { LoadingOutlined } from "@ant-design/icons";
 
 
@@ -22,7 +22,7 @@ export default function Races(props) {
     const getAllRaces = async () => {
         const urlAllRaces = "https://ergast.com/api/f1/2013/results/1.json";
         const response = await axios.get(urlAllRaces);
-        
+        console.log("iiiiiiiiiii", response)
         setAllRaces(response.data.MRData.RaceTable.Races);
         setIsLoading(false);
     }
@@ -48,8 +48,9 @@ export default function Races(props) {
     }
     
     return (
-        <div className="table-scroll">
+        <div className="table-scroll" >
             <div className="search">
+            <Breadcrumb />
                 <Space direction="vertical">
                     <Search
                         placeholder="Search"
@@ -74,9 +75,9 @@ export default function Races(props) {
                 </thead>
 
                 <tbody>
-                    {filteredData.map((race, i) => {                        
+                    {filteredData.map((race) => {                        
                         return (
-                            <tr key={i}>
+                            <tr key={race.Results[0].Driver.driverId}>
                                 <td className="td-driver">{race.round}</td>
                                 <td onClick={() => handleClickGetRaces(race.round)} className="td-driver2"><Flag country={getAlphaCode(props.flags, race.Circuit.Location.country)} size={40} />{race.raceName}</td>
                                 <td className="td-driver3">{race.Circuit.circuitName}</td>
