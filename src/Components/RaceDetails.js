@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-import { ExportOutlined } from "@ant-design/icons";
+import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
 import { getAlphaCode, getPositionColor } from "../Utils.js"
 import { useNavigate } from "react-router-dom";
 
@@ -44,19 +44,19 @@ export default function RaceDetails(props) {
 
     if (isLoading) {
         return (
-            <h1>Is loading...</h1>
+            <LoadingOutlined />
         )
     }
 
     return (
         <div className="table-scroll">
-            <ul >
-                <li><Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={40} /></li>
-                <li>Country: {raceResults.Circuit.Location.country} </li>
-                <li>Location: {raceResults.Circuit.Location.locality} </li>
-                <li>Date: {raceResults.date} </li>
-                <li>Full report: <a href={raceResults.url} target="_Self"><ExportOutlined /></a></li>
-            </ul>
+            < table className="main-table">
+                <tr><Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={120} /></tr>
+                <tr>Country: {raceResults.Circuit.Location.country} </tr>
+                <tr>Location: {raceResults.Circuit.Location.locality} </tr>
+                <tr>Date: {raceResults.date} </tr>
+                <tr>Full report: <a href={raceResults.url} target="_Self"><ExportOutlined /></a></tr>
+            </table>
 
             <table className="main-table">
                 <thead>

@@ -5,6 +5,7 @@ import axios from "axios";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { Input, Space } from 'antd';
+import { LoadingOutlined } from "@ant-design/icons";
 
 
 export default function Races(props) {
@@ -42,7 +43,7 @@ export default function Races(props) {
 
     if (isLoading) {
         return (
-            <h1>Is loading...</h1>
+            <LoadingOutlined />
         )
     }
     
