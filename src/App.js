@@ -11,8 +11,10 @@ import Logo from "./images/f1 logo.png";
 import axios from "axios";
 
 
+
 function App() {
   const [flags, setFlags] = useState([]);
+
 
   useEffect(() => {
     getFlags();
@@ -53,7 +55,7 @@ function App() {
           </nav>
         </div>
 
-        
+
 
         <Routes>
           <Route path="/" element={<Home flags={flags} />} />
