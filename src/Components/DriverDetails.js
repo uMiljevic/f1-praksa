@@ -56,8 +56,11 @@ export default function DriverDetails(props) {
                         <div className="img-driver"><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
                         <div className="info">
                             <Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} />
-                            <h3 className="driver-name">{driverDetails.Driver.givenName} </h3>
+                            <div className="driver-name">
+                            <h3>{driverDetails.Driver.givenName} </h3>
                             <h3> {driverDetails.Driver.familyName}</h3>
+                            </div>
+                           
                         </div>
                     </div>
                     <table className="details">
