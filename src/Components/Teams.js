@@ -81,8 +81,8 @@ export default function App(props) {
                 <tr key={team.teamId}>
                   <td className="td-teams">{team.position}</td>
                   <td className="td-teams2" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
-                    <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} />{team.Constructor.name}</td>
-                  <td className="td-teams3"><a href={team.Constructor.url} target="_blank" >Details<ExportOutlined /></a></td>
+                    <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} className="flag" />{team.Constructor.name}</td>
+                  <td className="td-teams3"><a href={team.Constructor.url} target="_blank" className="detailstext">Details  <ExportOutlined /></a></td>
                   <td className="td-teams-points">{team.points}</td>
                 </tr>
               );
