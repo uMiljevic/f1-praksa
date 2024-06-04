@@ -52,22 +52,24 @@ export default function Drivers(props) {
     // console.log("a", filteredData);
     return (
         <div className="main-driver-container">
-            <div className="search">
-                <Space direction="vertical">
-                    <Search
-                        placeholder="Search"
-                        value={inputText}
-                        onChange={(e) => setInputText(e.target.value)}
-                        label="Search"
-                        style={{
-                            width: 200,
-                        }}
-                    />
-                </Space>
+            <div className="title-search">
+                <div>
+                    <h1>Drivers Championship Standings - 2013</h1>
+                </div>
+                <div className="search">
+                    <Space direction="vertical">
+                        <Search
+                            placeholder="Search"
+                            value={inputText}
+                            onChange={(e) => setInputText(e.target.value)}
+                            label="Search"
+                            style={{
+                                width: 200,
+                            }}
+                        />
+                    </Space>
+                </div>
             </div>
-
-            <h1>Drivers Championship Standings - 2013</h1>
-
             <div className="table-scroll">
                 <table className="main-table">
                     <thead>
