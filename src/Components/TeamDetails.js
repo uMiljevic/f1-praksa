@@ -40,38 +40,55 @@ export default function TeamDetails(props) {
     setIsLoading(false);
   }
 
+  const handleGoToRaceDetails = (raceId) => {        
+    const linkTo = `/raceDetails/${raceId}`;
+    navigate(linkTo);
+}
+
   if (isLoading) {
     return <LoadingOutlined />;
   }
 
   return (
-    <div>
-      <div className="main-team-container">
+    <div className="main-team-detail-container">
+      
+      <div className="detail-container-left">
         <div className="main-team-detail-menu">
           <img id="nameimg" src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} />
           <div className="name">
             <p><Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} /></p>
-            <p id="constructorname">{teamDetails.ConstructorStandings[0].Constructor.name}</p>
+            <p id="constructorname"><b>{teamDetails.ConstructorStandings[0].Constructor.name}</b></p>
           </div>
         </div>
 
         <table className="team-details">
-          
-          <tr>Country: {teamDetails.ConstructorStandings[0].Constructor.nationality}</tr>
-          <tr>Position: {teamDetails.ConstructorStandings[0].position}</tr>
-          <tr>Points: {teamDetails.ConstructorStandings[0].points}</tr>
-          <tr>History: <a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></tr>
+          <tr>
+            <td>Country:</td>
+            <td>{teamDetails.ConstructorStandings[0].Constructor.nationality}</td>
+          </tr>
+          <tr>
+            <td>Position:</td> 
+            <td>{teamDetails.ConstructorStandings[0].position}</td>
+          </tr>
+          <tr>
+            <td>Points: </td> 
+            <td>{teamDetails.ConstructorStandings[0].points}</td>
+          </tr>
+          <tr>
+            <td>History: </td> 
+            <td><a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></td>
+          </tr>
         </table>
       </div>
 
 
-
-      <h3 class="formularesults">Formula 1 2013 Results</h3>
       <div className="table-scroll">
-
-        <table className="main-table" >
+      <div class="formularesults">
+        <h1>Formula 1 2013 Results</h1>
+      </div>
+          <table className="main-table" >
+     
           <thead>
-
             <th>Round</th>
             <th>Grand Prix</th>
             <th>{teamResults[0].Results[0].Driver.familyName}</th>
@@ -84,8 +101,8 @@ export default function TeamDetails(props) {
               return (
                 <tr key={teamresult.teamId}>
                   <td className="td-teams">{teamresult.round}</td>
-                  <td className="td-teams2"><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} />{teamresult.raceName}</td>
-                  <td className="td-teams3" style={{ backgroundColor: (getPositionColor(teamresult.Results[0].position)) }}>{teamresult.Results[0].position}</td>
+                  <td className="td-teams2" onClick={() => handleGoToRaceDetails(teamresult.round)}><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} className="flag" />{teamresult.raceName}</td>
+                  <td className="td-teams8" style={{ backgroundColor: (getPositionColor(teamresult.Results[0].position)) }}>{teamresult.Results[0].position}</td>
                   <td className="td-teams4" style={{ backgroundColor: (getPositionColor(teamresult.Results[1].position)) }}>{teamresult.Results[1].position}</td>
                   <td className="td-teams-points">{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
                 </tr>
