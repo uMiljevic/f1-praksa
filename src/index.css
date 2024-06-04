@@ -7,9 +7,27 @@
   box-sizing: border-box;
 }
 
-/* body{
-  background-color: #000;
-} */
+body{
+  background: hsl(0, 0%, 0%);
+  background: linear-gradient(169deg, hsl(0, 0%, 0%) 0%, hsl(0, 58%, 19%) 65%, hsl(354, 70%, 54%) 100%);
+}
+
+/* ==> App */
+.main-container{
+  width: 100%;
+  height: 100vh;
+}
+
+.tvButton{
+  z-index: 1;
+  padding: 8px 24px;
+  position: absolute;
+  top: 8%;
+  left: 80%;
+}
+/* App <== */
+
+/* ==> Background Video */
 
 .video-container{
   width: 100%;
@@ -30,14 +48,12 @@ video{
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, .4);
+  background-color: hsla(0, 0%, 0%, 0.4);
 }
-/* .main-container{
-  width: 100%;
-  height: 100vh;
-} */
+/* Background Video <== */
 
-/* Nav Bar */
+
+/* ==> Nav Bar */
 
 .nav-position{
   position: absolute;
@@ -53,7 +69,7 @@ video{
 }
 
 .list-container{
-  display: flex;
+  display: inline-block;
   justify-content: space-around;
   align-items: center;
   width: 50%;
@@ -78,13 +94,18 @@ video{
   color: #fff;
   font-size: 18px;
   font-weight: 800;
+  transition-duration: 300ms;
 }
 
-/* Home Component */
+.nav-bar ul a:hover{
+  border-bottom: 5px solid hsl(354, 70%, 54%);
+  padding-bottom: 3px;
+  transition-duration: 300ms;
+}
+/* Nav Bar <== */
 
-/* .main-home-container{
-  
-} */
+
+/* Home Component */
 
 .home-position{
   position: absolute;
@@ -118,16 +139,18 @@ video{
   cursor: pointer;
   color: #FBFBFB;
   z-index: 1;
+  transition-duration: 300ms;
 }
 
 .icon:hover{
   color: hsl(354, 70%, 54%);
   transform: scale(1.2);
+  transition-duration: 300ms;
 }
 
 
 
-/* Tables CSS */
+/* Driver CSS */
 
 
 .main-driver-container{
@@ -135,6 +158,12 @@ video{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+
 }
 
 .main-table tbody tr:nth-child(even):hover{
@@ -223,6 +252,53 @@ video{
 
 .flag{
   margin-right: 5px;
+}
+
+/* Driver Details css */
+
+.main-table-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width:70%;
+}
+
+.title {
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.details-table {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-detail-menu {
+  text-align: left;
+  padding: 10px;
+}
+
+.img-driver img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.info-container {
+  display: flex;
+}
+
+.info {
+  width: 150px;
+  height: 150px;
+  padding-left: 10px;
+}
+.driver-name {
+  font-size: 18px;
 }
 
 /* Races CSS */
