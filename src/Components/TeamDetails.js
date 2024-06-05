@@ -40,77 +40,80 @@ export default function TeamDetails(props) {
     setIsLoading(false);
   }
 
-  const handleGoToRaceDetails = (raceId) => {        
+  const handleGoToRaceDetails = (raceId) => {
     const linkTo = `/raceDetails/${raceId}`;
     navigate(linkTo);
-}
+  }
 
   if (isLoading) {
     return <LoadingOutlined />;
   }
 
   return (
-    <div className="main-team-detail-container">
-      
-      <div className="detail-container-left">
-        <div className="main-team-detail-menu">
-          <img id="nameimg" src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} />
-          <div className="name">
-            <p><Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} /></p>
-            <p id="constructorname"><b>{teamDetails.ConstructorStandings[0].Constructor.name}</b></p>
-          </div>
-        </div>
-
-        <table className="team-details">
-          <tr>
-            <td>Country:</td>
-            <td>{teamDetails.ConstructorStandings[0].Constructor.nationality}</td>
-          </tr>
-          <tr>
-            <td>Position:</td> 
-            <td>{teamDetails.ConstructorStandings[0].position}</td>
-          </tr>
-          <tr>
-            <td>Points: </td> 
-            <td>{teamDetails.ConstructorStandings[0].points}</td>
-          </tr>
-          <tr>
-            <td>History: </td> 
-            <td><a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></td>
-          </tr>
-        </table>
-      </div>
-
-
-      <div className="table-scroll">
-      <div class="formularesults">
+    <div className="main-table-container">
+      <div className="title">
         <h1>Formula 1 2013 Results</h1>
       </div>
-          <table className="main-table" >
-     
-          <thead>
-            <th>Round</th>
-            <th>Grand Prix</th>
-            <th>{teamResults[0].Results[0].Driver.familyName}</th>
-            <th>{teamResults[0].Results[1].Driver.familyName}</th>
-            <th>Points</th>
-          </thead>
-          <tbody>
-            {teamResults.map((teamresult) => {
-              //console.log('teamresult', teamresult);
-              return (
-                <tr key={teamresult.teamId}>
-                  <td className="td-teams">{teamresult.round}</td>
-                  <td className="td-teams2" onClick={() => handleGoToRaceDetails(teamresult.round)}><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} className="flag" />{teamresult.raceName}</td>
-                  <td className="td-teams8" style={{ backgroundColor: (getPositionColor(teamresult.Results[0].position)) }}>{teamresult.Results[0].position}</td>
-                  <td className="td-teams4" style={{ backgroundColor: (getPositionColor(teamresult.Results[1].position)) }}>{teamresult.Results[1].position}</td>
-                  <td className="td-teams-points">{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
-                </tr>
+      <div className="details-table">
+        <div className="main-detail-menu">
+          <div className="info-team-container">
+            <div className="img-team"><img className="img123" src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} /></div>
+            <div className="info-team">
+              <Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} />
+              <div className="team-name">
+                <h3>{teamDetails.ConstructorStandings[0].Constructor.name}</h3>
+              </div>
+            </div>
+          </div>
 
-              );
-            })}
-          </tbody>
-        </table>
+
+          <table className="details">
+            <tr>
+              <td>Country:</td>
+              <td>{teamDetails.ConstructorStandings[0].Constructor.nationality}</td>
+            </tr>
+            <tr>
+              <td>Position:</td>
+              <td>{teamDetails.ConstructorStandings[0].position}</td>
+            </tr>
+            <tr>
+              <td>Points: </td>
+              <td>{teamDetails.ConstructorStandings[0].points}</td>
+            </tr>
+            <tr>
+              <td>History: </td>
+              <td><a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></td>
+            </tr>
+          </table>
+        </div>
+
+
+        <div className="table-scroll">
+          <table className="main-table" >
+            <thead>
+              <th>Round</th>
+              <th>Grand Prix</th>
+              <th>{teamResults[0].Results[0].Driver.familyName}</th>
+              <th>{teamResults[0].Results[1].Driver.familyName}</th>
+              <th>Points</th>
+            </thead>
+            <tbody>
+              {teamResults.map((teamresult) => {
+                //console.log('teamresult', teamresult);
+                return (
+                  <tr key={teamresult.teamId}>
+                    <td className="td-driver">{teamresult.round}</td>
+                    <td className="td-driver2" onClick={() => handleGoToRaceDetails(teamresult.round)}><Flag country={getAlphaCode(props.flags, teamresult.Circuit.Location.country)} size={40} className="flag" />{teamresult.raceName}</td>
+                    <td className="td-driver3" style={{ backgroundColor: (getPositionColor(teamresult.Results[0].position)) }}>{teamresult.Results[0].position}</td>
+                    <td className="td-driver" style={{ backgroundColor: (getPositionColor(teamresult.Results[1].position)) }}>{teamresult.Results[1].position}</td>
+                    <td className="td-driver-race">{parseInt(teamresult.Results[0].points) + parseInt(teamresult.Results[1].points)}</td>
+                  </tr>
+
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
