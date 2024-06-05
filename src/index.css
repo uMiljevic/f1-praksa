@@ -171,7 +171,6 @@ video {
 }
 
 
-
 /* Driver CSS */
 
 
@@ -184,8 +183,7 @@ video {
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-
+  width: 100%; 
 }
 
 .main-table tbody tr:nth-child(even):hover {
@@ -223,6 +221,8 @@ video {
   height: 70vh;
   overflow-y: auto;
   width:75%;
+  border: 1px solid #ffffff22;
+  border-radius: .7rem;
 }
 
 .table-scroll::-webkit-scrollbar {
@@ -237,7 +237,8 @@ video {
   width:80%;
   /* border: 1px solid black; */
   border-collapse: collapse;
-  background-color: white;
+  background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
+  box-shadow: 0 7px 20px 5px #00000088;
 }
 
 .main-table tbody tr:nth-child(even) {
@@ -249,6 +250,7 @@ td {
   /* border: 1px solid black; */
   border-collapse: collapse;
   padding: 5px 15px;
+  color: #FBFBFB;
 }
 
 
@@ -260,7 +262,6 @@ td {
   position: sticky;
   top: 0;
   padding: 0 10px 0 10px;
-  
 }
 
 
@@ -299,7 +300,6 @@ td {
   margin-bottom: 10px;
   width: 80%;
   text-align: center;
-
 }
 
 .title-search {
@@ -322,13 +322,14 @@ td {
   padding: 10px;
   flex-direction: column;
   -webkit-user-select:none;
+  user-select:none;
   border: 1px solid #ffffff22;
   background-color: #282c34;
   background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
   box-shadow: 0 7px 20px 5px #00000088;
   border-radius: .7rem;
-  backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
   overflow: hidden;
   transition: .5s all;
 }
@@ -371,7 +372,8 @@ td {
 .img-driver img {
   width: 150px;
   object-fit: cover;
-  border-radius: 5%;
+  border-radius: .7rem;
+  border: 1px solid #ffffff22;
 }
 
 .details {
@@ -453,3 +455,97 @@ td {
 /* color: hsl(27, 98%, 54%, .2); */
 /* Grey */
 /* color: hsl(210, 11%, 71%, .2); */
+
+/* Loader CSS */
+
+/* Loader Position */
+.loader-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body > svg {
+  width: 600px;
+  height: auto;
+  --stroke-dash: 46;
+  --stroke-dash-negative: -46;
+}
+/* animate the car to move slightly forwards and backwards */
+g#car {
+  transform: translateX(-3px);
+  animation: translate 2s ease-in-out infinite;
+}
+/* animate the shadow to skew  toward the left */
+path#shadow {
+  animation: skew 2s ease-in-out infinite;
+}
+/* animate the wheels to spin  clockwise*/
+g.wheels use {
+  animation: rotate 2s linear infinite;
+}
+/* animate the dashes of air to briefly show them and then hide them from view */
+path.air {
+  /* starting from the values described by the --stroke-dash property
+  ! the property is updated for each path in the script
+  */
+  stroke-dasharray: var(--stroke-dash);
+  stroke-dashoffset: var(--stroke-dash);
+  /* ! the delay of the animation is also set up in the script  */
+  animation: offset 2s linear infinite;
+  /* opacity to hide the obnoxious dots otherwise shown on firefox and edge */
+  opacity: 0;
+}
+
+/* keyframe animations
+! be sure to have the animations overlap as to show a realistic behavior
+- as the car moves right the wheels spin faster, the shadow skews left, the dashes of air appear in sequence
+- as the car moves left the wheels spin slower while the shadow returns to its resting place
+*/
+@keyframes translate {
+  50% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(-3px);
+  }
+}
+@keyframes skew {
+  50% {
+    transform: skewX(-20deg);
+  }
+}
+@keyframes rotate {
+  50% {
+    transform: rotate(4turn);
+  }
+  100% {
+    transform: rotate(6turn);
+  }
+}
+
+/* beside animating the stroke-dashoffset property rapidly change the opacity to show the dashes and hide them when they are removed by changing the offset property
+otherwise the dashes would still be partially visible on firefox and edge (at least)
+*/
+@keyframes offset {
+  1% {
+    opacity: 1;
+  }
+  15% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  24% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+    /* ! on chrome and firefox the calc() function allows to compute the negative value, but Edge seems to prefer having another variable instead */
+    /* stroke-dashoffset: calc(var(--stroke-dash) * -1px); */
+    stroke-dashoffset: var(--stroke-dash-negative);
+  }
+  100% {
+    stroke-dashoffset: var(--stroke-dash-negative);
+  }
+}

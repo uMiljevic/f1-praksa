@@ -54,27 +54,27 @@ export function getPositionColor(value) {
 
     switch(value){
         case "1":
-            return "hsl(162, 73%, 46%, .2)";
+            return "hsl(162, 73%, 46%,  .5)";
         case "2":
-            return "hsl(45, 100%, 51%, .2)";
+            return "hsl(45, 100%, 51%, .5)";
         case "3":
-            return "hsl(354, 70%, 54%, .2)";
+            return "hsl(195, 59%, 58%, .5)";
         case "4": 
-            return "hsl(27, 98%, 54%, .2)"
+            return "hsl(27, 98%, 54%, .5)"
         case "5":
-            return "hsl(27, 98%, 54%, .2)";
+            return "hsl(27, 98%, 54%, .5)";
         case "6":
-            return "hsl(27, 98%, 54%, .2)";
+            return "hsl(27, 98%, 54%, .5)";
         case "7":
-            return "hsl(27, 98%, 54%, .2)";
+            return "hsl(27, 98%, 54%, .5)";
         case "8": 
-            return "hsl(27, 98%, 54%, .2)";
+            return "hsl(27, 98%, 54%, .5)";
         case "9":
-            return "hsl(27, 98%, 54%, .2)";
+            return "hsl(27, 98%, 54%, .5)";
         case "10":
-            return "hsl(27, 98%, 54%, .2)";
+            return "hsl(27, 98%, 54%, .5)";
 
-        default: return "hsl(210, 11%, 71%, .2)";
+        default: return "hsl(210, 11%, 71%, .5)";
     }
 
 }
