@@ -47,8 +47,11 @@ export default function DriverDetails(props) {
     }
     return (
         <div className="main-table-container">
-            <div className="title">
-                <h1>Formula 1 2013 - Results</h1>
+            <div className="title-container">
+                <div className="empty-div"></div>
+                <div>
+                    <h3>Formula 1 2013 - Results</h3>
+                </div>
             </div>
             <div className="details-table">
                 <div className="main-detail-menu">
@@ -57,28 +60,28 @@ export default function DriverDetails(props) {
                         <div className="info">
                             <Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} />
                             <div className="driver-name">
-                            <h3>{driverDetails.Driver.givenName} </h3>
-                            <h3> {driverDetails.Driver.familyName}</h3>
+                                <h3>{driverDetails.Driver.givenName} </h3>
+                                <h3> {driverDetails.Driver.familyName}</h3>
                             </div>
-                           
+
                         </div>
                     </div>
                     <hr />
                     <table className="details">
                         <tr>
-                            <td className="details-data">Country: </td>
+                            <td><b>Country: </b></td>
                             <td>{driverDetails.Driver.nationality}</td>
                         </tr>
                         <tr>
-                            <td className="details-data">Team:</td>
+                            <td><b>Team: </b></td>
                             <td>{driverDetails.Constructors[0].name}</td>
                         </tr>
                         <tr>
-                            <td className="details-data">Birth:</td>
+                            <td><b>Birth: </b></td>
                             <td>{driverDetails.Driver.dateOfBirth}</td>
                         </tr>
                         <tr>
-                            <td className="details-data">Biography:</td>
+                            <td><b>Biography: </b></td>
                             <td><a href={driverDetails.Driver.url} target="_blanc">Read <ExportOutlined /></a></td>
                         </tr>
                     </table>
