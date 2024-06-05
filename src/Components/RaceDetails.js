@@ -51,69 +51,89 @@ export default function RaceDetails(props) {
     }
 
     return (
-        <div className="table-scroll9">
-            <div className="tables-titles">
-                <h2 >Qualifying Results</h2>            
-                <h2 >Race Results</h2>
+        <div className="main-table-container">
+            <div className="title">
+                <h1 >Qualifying Results</h1>
+                <h1 >Race Results</h1>
             </div>
-            <div className="tables-position">
-                <table className="main-table1">
-                    <tr><Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={120} /></tr>
-                    <tr>Country: {raceResults.Circuit.Location.country} </tr>
-                    <tr>Location: {raceResults.Circuit.Location.locality} </tr>
-                    <tr>Date: {raceResults.date} </tr>
-                    <tr>Full report: <a href={raceResults.url} target="_Self"><ExportOutlined /></a></tr>
-                </table>
-
-                <table className="main-table">
-                    <thead>
-
+            <div className="details-table">
+                <div className="main-detail-menu">
+                    <div className="info-container">
+                        <div className="info-races">
+                            <Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={200} />
+                            <div className="driver-name">
+                                <h3> {raceResults.raceName}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <table className="details">
                         <tr>
+                            <td className="details-data">Country: </td>
+                            <td>{raceResults.Circuit.Location.country}</td>
+                        </tr>
+                        <tr>
+                            <td className="details-data">Location: </td>
+                            <td>{raceResults.Circuit.Location.locality}</td>
+                        </tr>
+                        <tr>
+                            <td className="details-data">Date: </td>
+                            <td>{raceResults.date}</td>
+                        </tr>
+                        <tr>
+                            <td className="details-data">Full report: </td>
+                            <td><a href={raceResults.url} target="_Self">Wiki <ExportOutlined /></a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div className="table-scroll-race">
+                    <table className="main-table">
+                        <thead>
                             <th>Pos</th>
                             <th>Driver</th>
                             <th>Team</th>
                             <th>Best Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {raceQualifiers.map((qualifier) => {
-                            return (
-                                <tr key={qualifier.Driver.driverId}>
-                                    <td className="td-driver">{qualifier.position}</td>
-                                    <td className="td-driver2" onClick={() => handleGoToDriverDetails(qualifier.Driver.driverId)} ><Flag country={getAlphaCode(props.flags, qualifier.Driver.nationality)} size={40} />{qualifier.Driver.familyName} </td>
-                                    <td className="td-driver3">{qualifier.Constructor.name} </td>
-                                    <td className="td-driver">{getBestTimes(qualifier)} </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-
-                <table className="main-table">
-                    <thead>
-
-                        <tr>
-                            <th>Pos</th>
-                            <th>Driver</th>
-                            <th>Team</th>
-                            <th>Result</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {raceResults.Results.map((result) => {
-                            return (
-                                <tr key={result.Driver.driverId}>
-                                    <td className="td-driver" >{result.position} </td>
-                                    <td className="td-driver2" onClick={() => handleGoToDriverDetails(result.Driver.driverId)}><Flag country={getAlphaCode(props.flags, result.Driver.nationality)} size={40} />{result.Driver.familyName} </td>
-                                    <td className="td-driver3">{result.Constructor.name} </td>
-                                    <td className="td-driver4">{result.Time ? result.Time.time : ""}  </td>
-                                    <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(result.position)) }}>{result.points}  </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {raceQualifiers.map((qualifier) => {
+                                return (
+                                    <tr key={qualifier.Driver.driverId}>
+                                        <td className="td-driver">{qualifier.position}</td>
+                                        <td className="td-driver2" onClick={() => handleGoToDriverDetails(qualifier.Driver.driverId)} ><Flag country={getAlphaCode(props.flags, qualifier.Driver.nationality)} size={40} className="flag" />{qualifier.Driver.familyName} </td>
+                                        <td className="td-driver3">{qualifier.Constructor.name} </td>
+                                        <td className="td-driver">{getBestTimes(qualifier)} </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="table-scroll-race">
+                    <table className="main-table">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Driver</th>
+                                <th>Team</th>
+                                <th>Result</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {raceResults.Results.map((result) => {
+                                return (
+                                    <tr key={result.Driver.driverId}>
+                                        <td className="td-driver" >{result.position} </td>
+                                        <td className="td-driver2" onClick={() => handleGoToDriverDetails(result.Driver.driverId)}><Flag country={getAlphaCode(props.flags, result.Driver.nationality)} size={40} className="flag" />{result.Driver.familyName} </td>
+                                        <td className="td-driver3">{result.Constructor.name} </td>
+                                        <td className="td-driver4">{result.Time ? result.Time.time : ""}  </td>
+                                        <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(result.position)) }}>{result.points}  </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );
