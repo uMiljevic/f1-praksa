@@ -13,6 +13,13 @@ export default function Home() {
         deleteSpeed: 120,
     });
 
+    const [text2] = useTypewriter({
+        words: ['Uroš', 'Vesna', 'Dušan', 'Jelena'],
+        loop: {},
+        typeSpeed: 100,
+        deleteSpeed: 120,
+    });
+
     // F1TV Button Colors
     const colors3 = ['hsl(354, 70%, 54%)', 'hsl(354, 70%, 54%, .8)', 'hsl(354, 70%, 54%, .7)'];
     const getHoverColors = (colors) =>
@@ -56,7 +63,19 @@ export default function Home() {
             </div>
 
             <div className="footer-position">
+
+                <div className="footer-authors">
+                    <p>
+                        Authors: <span style={{ fontWeight: 'bold', color: '#f44336' }}>
+                            {text2}
+                        </span>
+                        <span style={{ color: '#f44336' }}>
+                            <Cursor />
+                        </span>
+                    </p>
+                </div>
                 <div className="footer">
+                    
                     <Link to="https://www.youtube.com/@Formula1" target="_blanc">
                         <YoutubeFilled className="icon" />
                     </Link>
