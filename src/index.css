@@ -12,8 +12,12 @@ body {
   background: linear-gradient(169deg, hsl(0, 0%, 0%) 0%, hsl(0, 58%, 19%) 65%, hsl(354, 70%, 54%) 100%);
 }
 
-h1 {
+h1, h3 {
   color: white;
+}
+
+h1 {
+  text-align: left;
 }
 
 /* ==> App */
@@ -233,6 +237,20 @@ video {
   width: 100%;
 }
 
+.main-title {
+  width: 75%;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.title-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  padding: 10px 0 10px 0;
+}
+
 .main-table {
   width:80%;
   /* border: 1px solid black; */
@@ -280,7 +298,7 @@ td {
 }
 
 .flag {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 /* Driver Details css */
@@ -295,18 +313,17 @@ td {
   width: 80%;
 }
 
-.title {
-  margin-bottom: 10px;
-  width: 80%;
-  text-align: center;
-}
-
-.title-search {
+.title-container {
   display: flex;
+  flex-direction: row;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  width: 75%;
-  margin-bottom: 10px;
+}
+
+.empty-div {
+  width: 256px;
+  height: 50px;
 }
 
 .details-table {
