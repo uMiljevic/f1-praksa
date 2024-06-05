@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
-import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
+import { ExportOutlined } from "@ant-design/icons";
 import { getAlphaCode, getPositionColor } from "../Utils.js"
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader.js";
 
 export default function RaceDetails(props) {
     const [raceQualifiers, setRaceQualifiers] = useState([]);
@@ -45,7 +46,7 @@ export default function RaceDetails(props) {
 
     if (isLoading) {
         return (
-            <LoadingOutlined />
+            <Loader />
         )
     }
 
