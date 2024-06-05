@@ -207,18 +207,19 @@ video {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #FBFBFB;
+  background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
+  border-radius: 0 5px 5px 0;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: hsl(0, 6%, 19%, 50%);
+  background: hsl(354, 70%, 54%);
   border-radius: 0 5px 5px 0;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(0, 6%, 19%, 70%);
+  background: hsl(354, 70%, 54%, .8);
 }
 
 .table-scroll {
@@ -229,9 +230,9 @@ video {
   border-radius: .7rem;
 }
 
-.table-scroll::-webkit-scrollbar {
+/* .table-scroll::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .table-scroll>.main-table {
   width: 100%;
@@ -344,19 +345,19 @@ td {
   background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
   box-shadow: 0 7px 20px 5px #00000088;
   border-radius: .7rem;
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
+  /* -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px); */
   overflow: hidden;
   transition: .5s all;
 }
 .main-detail-menu ::before{
-  position: fixed;
+  position: absolute;
   content: "";
   box-shadow: 0 0 100px 40px #ffffff08;
   top: -10%;
   left: -100%;
   transform: rotate(-45deg);
-  height: 60rem;
+  height: 100vh;
   transition: 0.7s all;
 }
 .main-detail-menu:hover{
