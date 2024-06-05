@@ -63,22 +63,23 @@ export default function DriverDetails(props) {
                            
                         </div>
                     </div>
+                    <hr />
                     <table className="details">
                         <tr>
-                            <td>Country: </td>
+                            <td className="details-data">Country: </td>
                             <td>{driverDetails.Driver.nationality}</td>
                         </tr>
                         <tr>
-                            <td>Team:</td>
+                            <td className="details-data">Team:</td>
                             <td>{driverDetails.Constructors[0].name}</td>
                         </tr>
                         <tr>
-                            <td>Birth:</td>
+                            <td className="details-data">Birth:</td>
                             <td>{driverDetails.Driver.dateOfBirth}</td>
                         </tr>
                         <tr>
-                            <td>Biography:</td>
-                            <td><a href={driverDetails.Driver.url} target="_Blanc"> <ExportOutlined /></a></td>
+                            <td className="details-data">Biography:</td>
+                            <td><a href={driverDetails.Driver.url} target="_blanc">Read <ExportOutlined /></a></td>
                         </tr>
                     </table>
                 </div>
@@ -97,7 +98,7 @@ export default function DriverDetails(props) {
                                     <tr key={results.driverId}>
                                         <td className="td-driver"> {results.round} </td>
                                         <td className="td-driver2" onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} className="flag" />{results.raceName}</td>
-                                        <td className="td-driver3"> {results.Results[0].Constructor.name} </td>
+                                        <td> {results.Results[0].Constructor.name} </td>
                                         <td className="td-driver"> {results.Results[0].grid} </td>
                                         <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(results.Results[0].position)) }}> {results.Results[0].position} </td>
                                     </tr>
