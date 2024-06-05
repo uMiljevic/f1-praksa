@@ -23,7 +23,7 @@ function App() {
   const getFlags = async () => {
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await axios.get(urlFlags);
-    console.log('flag', response.data);
+    
     setFlags(response.data);
   };
 
