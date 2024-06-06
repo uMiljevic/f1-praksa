@@ -29,7 +29,6 @@ export default function Drivers(props) {
     }
 
     const handleClickDriverDetails = (driverId) => {
-        console.log("driver id", driverId);
         const linkTo = `/driverDetails/${driverId}`;
         navigate(linkTo);
     }
@@ -48,13 +47,14 @@ export default function Drivers(props) {
     if (isLoading) {
         return <Loader />;
     }
-
-    // console.log("a", filteredData);
     return (
         <div className="main-driver-container">
+            <div className="main-title">
+                <h1>Drivers Championship</h1>
+            </div>
             <div className="title-search">
                 <div>
-                    <h1>Drivers Championship Standings - 2013</h1>
+                    <h3>Drivers Championship Standings - 2013</h3>
                 </div>
                 <div className="search">
                     <Space direction="vertical">
@@ -79,7 +79,6 @@ export default function Drivers(props) {
                         <th>Points</th>
                     </thead>
                     <tbody>
-
                         {filteredData.map((driver) => {
                             return (
                                 <tr key={driver.Driver.driverId}>

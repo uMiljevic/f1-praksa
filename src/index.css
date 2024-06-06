@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
 * {
   font-family: 'Poppins', 'Helvetica';
@@ -12,8 +13,14 @@ body {
   background: linear-gradient(169deg, hsl(0, 0%, 0%) 0%, hsl(0, 58%, 19%) 65%, hsl(354, 70%, 54%) 100%);
 }
 
-h1 {
+h1, h3 {
   color: white;
+}
+
+h1 {
+  text-align: left;
+  font-family: 'Orbitron';
+  font-style: italic;
 }
 
 /* ==> App */
@@ -136,15 +143,15 @@ video {
   align-items: center;
 }
 
-.footer-authors{
+.footer-authors {
   width: 20%;
   color: #FBFBFB;
   box-shadow:
-  hsl(354, 70%, 54%, .4) -5px 5px, 
-  hsl(354, 70%, 54%, .3) -10px 10px, 
-  hsl(354, 70%, 54%, .2) -15px 15px,
-  hsl(354, 70%, 54%, .1) -20px 20px,
-  hsl(354, 70%, 54%, .05) -25px 25px;
+    hsl(354, 70%, 54%, .4) -5px 5px,
+    hsl(354, 70%, 54%, .3) -10px 10px,
+    hsl(354, 70%, 54%, .2) -15px 15px,
+    hsl(354, 70%, 54%, .1) -20px 20px,
+    hsl(354, 70%, 54%, .05) -25px 25px;
   padding: 0 5px;
 }
 
@@ -183,7 +190,7 @@ video {
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%; 
+  width: 100%;
 }
 
 .main-table tbody tr:nth-child(even):hover {
@@ -203,38 +210,53 @@ video {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #FBFBFB;
+  background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
+  border-radius: 0 5px 5px 0;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: hsl(0, 6%, 19%, 50%);
+  background: hsl(354, 70%, 54%);
   border-radius: 0 5px 5px 0;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(0, 6%, 19%, 70%);
+  background: hsl(354, 70%, 54%, .8);
 }
 
 .table-scroll {
   height: 70vh;
   overflow-y: auto;
-  width:75%;
+  width: 75%;
   border: 1px solid #ffffff22;
   border-radius: .7rem;
 }
 
-.table-scroll::-webkit-scrollbar {
+/* .table-scroll::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .table-scroll>.main-table {
   width: 100%;
 }
 
+.main-title {
+  width: 75%;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.title-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  padding: 10px 0 10px 0;
+}
+
 .main-table {
-  width:80%;
+  width: 80%;
   /* border: 1px solid black; */
   border-collapse: collapse;
   background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
@@ -275,12 +297,13 @@ td {
   align-items: center;
   cursor: pointer;
 }
+
 .td-driver-race {
   text-align: center;
 }
 
 .flag {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 /* Driver Details css */
@@ -295,24 +318,24 @@ td {
   width: 80%;
 }
 
-.title {
-  margin-bottom: 10px;
-  width: 80%;
-  text-align: center;
-}
-
-.title-search {
+.title-container {
   display: flex;
+  flex-direction: row;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  width: 75%;
-  margin-bottom: 10px;
+}
+
+.empty-div {
+  width: 256px;
+  height: 50px;
 }
 
 .details-table {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  width:100%;
+  width: 100%;
 }
 
 .main-detail-menu {
@@ -320,35 +343,37 @@ td {
   text-align: left;
   padding: 10px;
   flex-direction: column;
-  -webkit-user-select:none;
-  user-select:none;
+  -webkit-user-select: none;
+  user-select: none;
   border: 1px solid #ffffff22;
   background-color: #282c34;
   background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
   box-shadow: 0 7px 20px 5px #00000088;
   border-radius: .7rem;
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
+  /* -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px); */
   overflow: hidden;
   transition: .5s all;
 }
 .main-detail-menu ::before{
-  position: fixed;
+  position: absolute;
   content: "";
   box-shadow: 0 0 100px 40px #ffffff08;
   top: -10%;
   left: -100%;
   transform: rotate(-45deg);
-  height: 60rem;
+  height: 100vh;
   transition: 0.7s all;
 }
-.main-detail-menu:hover{
+
+.main-detail-menu:hover {
   border: 1px solid #ffffff44;
   box-shadow: 0 7px 50px 10px #000000aa;
   transform: scale(1.015);
-  filter: brightness(1.3); 
+  filter: brightness(1.3);
 }
-.main-detail-menu:hover ::before{
+
+.main-detail-menu:hover ::before {
   filter: brightness(.5);
   top: -100%;
   left: 200%;
@@ -381,14 +406,14 @@ td {
   color: hsl(0, 0%, 98%);
 }
 
-.details a{
+.details a {
   color: hsl(0, 0%, 98%);
   text-decoration: none;
   border-bottom: 1px solid #88888855;
   padding-bottom: 3px;
 }
 
-.details a:hover{
+.details a:hover {
   color: hsl(354, 70%, 54%);
 }
 
@@ -400,13 +425,19 @@ td {
   color: hsl(0, 0%, 98%);
 }
 
-
 .driver-name {
   display: flex;
   flex-direction: column;
   font-size: 16px;
   padding-left: 10px;
 }
+
+/* .driver-name1 {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  padding-left: 10px;
+} */
 
 /* Races CSS */
 
@@ -441,6 +472,158 @@ td {
   cursor: pointer;
 }
 
+/* RaceDetails */
+
+.main-table-container-race {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+.info-races {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  padding: 10px;
+  align-items: center;
+  color: hsl(0, 0%, 98%);
+}
+
+.table-scroll-race >.main-table-race{
+  width: 100%;
+}
+
+.table-scroll-race2 >.main-table-race{
+  width: 100%;
+}
+
+.table-scroll-race {
+  display: flex;
+  flex-direction: 0;
+  height: 70vh;
+  overflow-y: auto;
+  width: 35%;
+  border: 1px solid #ffffff22;
+  border-radius: .7rem;
+}
+
+.table-scroll-race2 {
+  display: flex;
+  flex-direction: 0;
+  height: 70vh;
+  overflow-y: auto;
+  width: 43%;
+  border: 1px solid #ffffff22;
+  border-radius: .7rem;
+}
+
+.main-table-race{
+  width: 80%;
+  border-collapse: collapse;
+  background: linear-gradient(0deg, hsl(220, 13%, 18%) 0%, hsla(272, 100%, 6%, 0.5) 100%);
+  box-shadow: 0 7px 20px 5px #00000088;
+}
+
+.main-table-race tbody tr:nth-child(even) {
+  background-color: hsl(218, 11%, 66%, 50%);
+}
+
+.main-table-race tr,
+td {
+  /* border: 1px solid black; */
+  border-collapse: collapse;
+  padding: 5px 15px;
+  color: #FBFBFB;
+}
+
+.main-table-race th {
+  background-color: hsl(354, 70%, 54%);
+  color: #FBFBFB;
+  height: 50px;
+  font-size: 24px;
+  position: sticky;
+  top: 0;
+  padding: 0 10px 0 10px;
+}
+
+.info-container{
+  height: 300px;
+}
+
+.main-table-race th{
+  font-size: 18px;
+}
+.main-table-race th:nth-child(2),
+.main-table-race th:nth-child(3){
+  text-align: left;
+}
+
+.title{
+  display: flex;
+  justify-content: space-between;
+}
+.empty-race-div{
+  width: 80px;
+}
+
+
+/* ==> Teams CSS */
+.detailstext{
+  color: #FBFBFB;
+  text-decoration: none;
+}
+
+.detailstext:hover{
+  color: hsl(354, 70%, 54%);
+}
+
+.thead-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Teams CSS <== */
+
+/* ==> Team Details CSS */
+
+.team-name{
+  margin-top: 20px;
+} 
+
+.info-team{
+  height: 100px;
+  width: 100%;
+}
+
+.info-team-container,
+.info-team{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.img-team{
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-team img{
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  /* border-radius: .7rem;
+  border: 1px solid #ffffff22; */
+}
+
+/* Team Details CSS <== */
 
 
 
@@ -458,32 +641,36 @@ td {
 /* Loader CSS */
 
 /* Loader Position */
-.loader-container{
+.loader-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-body > svg {
+body>svg {
   width: 600px;
   height: auto;
   --stroke-dash: 46;
   --stroke-dash-negative: -46;
 }
+
 /* animate the car to move slightly forwards and backwards */
 g#car {
   transform: translateX(-3px);
   animation: translate 2s ease-in-out infinite;
 }
+
 /* animate the shadow to skew  toward the left */
 path#shadow {
   animation: skew 2s ease-in-out infinite;
 }
+
 /* animate the wheels to spin  clockwise*/
 g.wheels use {
   animation: rotate 2s linear infinite;
 }
+
 /* animate the dashes of air to briefly show them and then hide them from view */
 path.air {
   /* starting from the values described by the --stroke-dash property
@@ -506,19 +693,23 @@ path.air {
   50% {
     transform: translateX(3px);
   }
+
   100% {
     transform: translateX(-3px);
   }
 }
+
 @keyframes skew {
   50% {
     transform: skewX(-20deg);
   }
 }
+
 @keyframes rotate {
   50% {
     transform: rotate(4turn);
   }
+
   100% {
     transform: rotate(6turn);
   }
@@ -531,19 +722,23 @@ otherwise the dashes would still be partially visible on firefox and edge (at le
   1% {
     opacity: 1;
   }
+
   15% {
     stroke-dashoffset: 0;
     opacity: 1;
   }
+
   24% {
     opacity: 1;
   }
+
   25% {
     opacity: 0;
     /* ! on chrome and firefox the calc() function allows to compute the negative value, but Edge seems to prefer having another variable instead */
     /* stroke-dashoffset: calc(var(--stroke-dash) * -1px); */
     stroke-dashoffset: var(--stroke-dash-negative);
   }
+
   100% {
     stroke-dashoffset: var(--stroke-dash-negative);
   }
