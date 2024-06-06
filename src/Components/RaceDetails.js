@@ -51,16 +51,17 @@ export default function RaceDetails(props) {
     }
 
     return (
-        <div className="main-table-container">
+        <div className="main-table-container-race">
             <div className="title">
-                <h1 >Qualifying Results</h1>
-                <h1 >Race Results</h1>
+                <div className="empty-race-div"></div>
+                <h3 >Qualifying Results</h3>
+                <h3 >Race Results</h3>
             </div>
             <div className="details-table">
                 <div className="main-detail-menu">
                     <div className="info-container">
                         <div className="info-races">
-                            <Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={200} />
+                            <Flag country={getAlphaCode(props.flags, raceResults.Circuit.Location.country)} size={150} />
                             <div className="driver-name">
                                 <h3> {raceResults.raceName}</h3>
                             </div>
@@ -87,12 +88,12 @@ export default function RaceDetails(props) {
                     </table>
                 </div>
                 <div className="table-scroll-race">
-                    <table className="main-table">
+                    <table className="main-table-race">
                         <thead>
                             <th>Pos</th>
                             <th>Driver</th>
                             <th>Team</th>
-                            <th>Best Time</th>
+                            <th>P.B.</th>
                         </thead>
                         <tbody>
                             {raceQualifiers.map((qualifier) => {
@@ -108,8 +109,8 @@ export default function RaceDetails(props) {
                         </tbody>
                     </table>
                 </div>
-                <div className="table-scroll-race">
-                    <table className="main-table">
+                <div className="table-scroll-race2">
+                    <table className="main-table-race">
                         <thead>
                             <tr>
                                 <th>Pos</th>
@@ -126,7 +127,7 @@ export default function RaceDetails(props) {
                                         <td className="td-driver" >{result.position} </td>
                                         <td className="td-driver2" onClick={() => handleGoToDriverDetails(result.Driver.driverId)}><Flag country={getAlphaCode(props.flags, result.Driver.nationality)} size={40} className="flag" />{result.Driver.familyName} </td>
                                         <td className="td-driver3">{result.Constructor.name} </td>
-                                        <td className="td-driver4">{result.Time ? result.Time.time : ""}  </td>
+                                        <td className="td-driver3">{result.Time ? result.Time.time : ""}  </td>
                                         <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(result.position)) }}>{result.points}  </td>
                                     </tr>
                                 );

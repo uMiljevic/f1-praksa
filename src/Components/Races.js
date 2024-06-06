@@ -51,9 +51,12 @@ export default function Races(props) {
 
     return (
         <div className="main-driver-container" >
+            <div className="main-title">
+                <h1>Race calendar</h1>
+            </div>
             <div className="title-search">
                 <div>
-                    <h1>Race calendar 2013</h1>
+                    <h3>Race calendar 2013</h3>
                 </div>
                 <div className="search">
                     <Space direction="vertical">
@@ -70,7 +73,7 @@ export default function Races(props) {
                 </div>
             </div>
 
-            {/* <BreadCrumb /> */}
+            {/* <Breadcrumb /> */}
             <div className="table-scroll">
                 <table className="main-table">
                     <thead>
@@ -88,7 +91,7 @@ export default function Races(props) {
                             return (
                                 <tr key={race.Circuit.circuitId}>
                                     <td className="td-driver">{race.round}</td>
-                                    <td onClick={() => handleClickGetRaces(race.round)} className="td-driver2"><Flag country={getAlphaCode(props.flags, race.Circuit.Location.country)} size={40} className="flag"/>{race.raceName}</td>
+                                    <td onClick={() => handleClickGetRaces(race.round)} className="td-driver2"><Flag country={getAlphaCode(props.flags, race.Circuit.Location.country)} size={40} className="flag" />{race.raceName}</td>
                                     <td className="td-driver3">{race.Circuit.circuitName}</td>
                                     <td className="td-driver4">{race.date}</td>
                                     <td className="td-driver">{race.Results[0].Driver.familyName}</td>
