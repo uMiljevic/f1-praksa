@@ -69,31 +69,35 @@ export default function RaceDetails(props) {
                     </div>
                     <hr />
                     <table className="details">
-                        <tr>
-                            <td className="details-data">Country: </td>
-                            <td>{raceResults.Circuit.Location.country}</td>
-                        </tr>
-                        <tr>
-                            <td className="details-data">Location: </td>
-                            <td>{raceResults.Circuit.Location.locality}</td>
-                        </tr>
-                        <tr>
-                            <td className="details-data">Date: </td>
-                            <td>{raceResults.date}</td>
-                        </tr>
-                        <tr>
-                            <td className="details-data">Full report: </td>
-                            <td><a href={raceResults.url} target="_Self">Wiki <ExportOutlined /></a></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td className="details-data">Country: </td>
+                                <td>{raceResults.Circuit.Location.country}</td>
+                            </tr>
+                            <tr>
+                                <td className="details-data">Location: </td>
+                                <td>{raceResults.Circuit.Location.locality}</td>
+                            </tr>
+                            <tr>
+                                <td className="details-data">Date: </td>
+                                <td>{raceResults.date}</td>
+                            </tr>
+                            <tr>
+                                <td className="details-data">Full report: </td>
+                                <td><a href={raceResults.url} target="_Self">Wiki <ExportOutlined /></a></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className="table-scroll-race">
                     <table className="main-table-race">
                         <thead>
-                            <th>Pos</th>
-                            <th>Driver</th>
-                            <th>Team</th>
-                            <th>P.B.</th>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Driver</th>
+                                <th>Team</th>
+                                <th>P.B.</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {raceQualifiers.map((qualifier) => {
