@@ -68,32 +68,36 @@ export default function DriverDetails(props) {
                     </div>
                     <hr />
                     <table className="details">
-                        <tr>
-                            <td><b>Country: </b></td>
-                            <td>{driverDetails.Driver.nationality}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Team: </b></td>
-                            <td>{driverDetails.Constructors[0].name}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Birth: </b></td>
-                            <td>{driverDetails.Driver.dateOfBirth}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Biography: </b></td>
-                            <td><a href={driverDetails.Driver.url} target="_blanc">Read <ExportOutlined /></a></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td><b>Country: </b></td>
+                                <td>{driverDetails.Driver.nationality}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Team: </b></td>
+                                <td>{driverDetails.Constructors[0].name}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Birth: </b></td>
+                                <td>{driverDetails.Driver.dateOfBirth}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Biography: </b></td>
+                                <td><a href={driverDetails.Driver.url} target="_blanc">Read <ExportOutlined /></a></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className="table-scroll">
                     <table className="main-table">
                         <thead>
-                            <th>Round</th>
-                            <th>Grand Prix</th>
-                            <th>Team</th>
-                            <th>Grid</th>
-                            <th>Race</th>
+                            <tr>
+                                <th>Round</th>
+                                <th>Grand Prix</th>
+                                <th>Team</th>
+                                <th>Grid</th>
+                                <th>Race</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {driverResults.map((results) => {

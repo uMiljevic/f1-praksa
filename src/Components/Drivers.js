@@ -73,10 +73,12 @@ export default function Drivers(props) {
             <div className="table-scroll">
                 <table className="main-table">
                     <thead>
-                        <th>Position</th>
-                        <th>Driver</th>
-                        <th>Team</th>
-                        <th>Points</th>
+                        <tr>
+                            <th>Position</th>
+                            <th>Driver</th>
+                            <th>Team</th>
+                            <th>Points</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {filteredData.map((driver) => {

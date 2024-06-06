@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { Input, Space } from 'antd';
-import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
+import { ExportOutlined } from "@ant-design/icons";
+import Loader from "./Loader.js";
 
 
 
@@ -47,7 +48,7 @@ export default function App(props) {
   };
 
   if (isLoading) {
-    return <LoadingOutlined />;
+    return <Loader />;
   }
 
   //console.log(props);
@@ -55,10 +56,10 @@ export default function App(props) {
   return (
 
     <div className="main-driver-container">
-          <div className="title-search">
-              <div>
-                  <h1>Constructors Championship</h1>
-              </div>
+      <div className="title-search">
+        <div>
+          <h1>Constructors Championship</h1>
+        </div>
         {/* <input type="text" placeholder="Search" /> */}
         <Space direction="vertical">
           <Search
@@ -74,13 +75,15 @@ export default function App(props) {
       <div className="table-scroll">
         <table className="main-table">
           <thead >
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Details</th>
-            <th>Points</th>
+            <tr>
+              <th>Pos</th>
+              <th>Team</th>
+              <th>Details</th>
+              <th>Points</th>
+            </tr>
           </thead>
           <tbody>
-            {filteredData.map((team)=> {
+            {filteredData.map((team) => {
               //console.log('team', team);
               return (
                 <tr key={team.teamId}>
@@ -95,6 +98,6 @@ export default function App(props) {
           </tbody>
         </table>
       </div>
-</div>
+    </div>
   );
 }
