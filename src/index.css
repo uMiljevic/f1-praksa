@@ -460,6 +460,11 @@ td {
   font-size: 20px;
 }
 
+.main-table th:nth-child(1),
+.main-table th:nth-child(4){
+  text-align: center;
+}
+
 .td-race-position {
   width: 10%;
   text-align: center;
@@ -579,12 +584,6 @@ td {
 
 .detailstext:hover{
   color: hsl(354, 70%, 54%);
-}
-
-.thead-center{
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* Teams CSS <== */
