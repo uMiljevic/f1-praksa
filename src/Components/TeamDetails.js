@@ -57,7 +57,9 @@ export default function TeamDetails(props) {
       <div className="details-table">
         <div className="main-detail-menu">
           <div className="info-team-container">
-            <div className="img-team"><img className="img123" src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} /></div>
+            <div className="img-team">
+              <img className="img123" src={`${process.env.PUBLIC_URL}/assets/img/${params.teamId}.png`} />
+            </div>
             <div className="info-team">
               <Flag country={getAlphaCode(props.flags, teamDetails.ConstructorStandings[0].Constructor.nationality)} size={40} />
               <div className="team-name">
@@ -66,27 +68,27 @@ export default function TeamDetails(props) {
             </div>
           </div>
 
+          <hr />
 
           <table className="details">
             <tr>
-              <td>Country:</td>
+              <td><b>Country:</b></td>
               <td>{teamDetails.ConstructorStandings[0].Constructor.nationality}</td>
             </tr>
             <tr>
-              <td>Position:</td>
+              <td><b>Position:</b></td>
               <td>{teamDetails.ConstructorStandings[0].position}</td>
             </tr>
             <tr>
-              <td>Points: </td>
+              <td><b>Points:</b></td>
               <td>{teamDetails.ConstructorStandings[0].points}</td>
             </tr>
             <tr>
-              <td>History: </td>
-              <td><a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" ><ExportOutlined /></a></td>
+              <td><b>History:</b></td>
+              <td><a href={teamDetails.ConstructorStandings[0].Constructor.url} target="_blank" >Read <ExportOutlined /></a></td>
             </tr>
           </table>
         </div>
-
 
         <div className="table-scroll">
           <table className="main-table" >
