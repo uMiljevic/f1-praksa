@@ -47,8 +47,11 @@ export default function DriverDetails(props) {
     }
     return (
         <div className="main-table-container">
-            <div className="title">
-                <h1>Formula 1 2013 - Results</h1>
+            <div className="title-container">
+                <div className="empty-div"></div>
+                <div>
+                    <h3>Formula 1 2013 - Results</h3>
+                </div>
             </div>
             <div className="details-table">
                 <div className="main-detail-menu">
@@ -56,26 +59,30 @@ export default function DriverDetails(props) {
                         <div className="img-driver"><img src={`${process.env.PUBLIC_URL}/assets/img/${params.driverId}.jpg`} /></div>
                         <div className="info">
                             <Flag country={getAlphaCode(props.flags, driverDetails.Driver.nationality)} size={50} />
-                            <h3 className="driver-name">{driverDetails.Driver.givenName} </h3>
-                            <h3> {driverDetails.Driver.familyName}</h3>
+                            <div className="driver-name">
+                                <h3>{driverDetails.Driver.givenName} </h3>
+                                <h3> {driverDetails.Driver.familyName}</h3>
+                            </div>
+
                         </div>
                     </div>
+                    <hr />
                     <table className="details">
                         <tr>
-                            <td>Country: </td>
+                            <td><b>Country: </b></td>
                             <td>{driverDetails.Driver.nationality}</td>
                         </tr>
                         <tr>
-                            <td>Team:</td>
+                            <td><b>Team: </b></td>
                             <td>{driverDetails.Constructors[0].name}</td>
                         </tr>
                         <tr>
-                            <td>Birth:</td>
+                            <td><b>Birth: </b></td>
                             <td>{driverDetails.Driver.dateOfBirth}</td>
                         </tr>
                         <tr>
-                            <td>Biography:</td>
-                            <td><a href={driverDetails.Driver.url} target="_Blanc"> <ExportOutlined /></a></td>
+                            <td><b>Biography: </b></td>
+                            <td><a href={driverDetails.Driver.url} target="_blanc">Read <ExportOutlined /></a></td>
                         </tr>
                     </table>
                 </div>
@@ -94,7 +101,7 @@ export default function DriverDetails(props) {
                                     <tr key={results.driverId}>
                                         <td className="td-driver"> {results.round} </td>
                                         <td className="td-driver2" onClick={() => handleClickGetRaces(results.round)}><Flag country={getAlphaCode(props.flags, results.Circuit.Location.country)} size={40} className="flag" />{results.raceName}</td>
-                                        <td className="td-driver3"> {results.Results[0].Constructor.name} </td>
+                                        <td> {results.Results[0].Constructor.name} </td>
                                         <td className="td-driver"> {results.Results[0].grid} </td>
                                         <td className="td-driver-race" style={{ backgroundColor: (getPositionColor(results.Results[0].position)) }}> {results.Results[0].position} </td>
                                     </tr>

@@ -54,8 +54,11 @@ export default function App(props) {
 
   return (
 
-    <div className="main-team-container">
-      <div className="search">
+    <div className="main-driver-container">
+          <div className="title-search">
+              <div>
+                  <h1>Constructors Championship</h1>
+              </div>
         {/* <input type="text" placeholder="Search" /> */}
         <Space direction="vertical">
           <Search
@@ -68,7 +71,6 @@ export default function App(props) {
         </Space>
       </div>
 
-      <h1>Constructors Championship</h1>
       <div className="table-scroll">
         <table className="main-table">
           <thead >
@@ -79,14 +81,14 @@ export default function App(props) {
               //console.log('team', team);
               return (
                 <tr key={team.teamId}>
-                  <td className="td-teams">{team.position}</td>
-                  <td className="td-teams2" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
-                    <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} />{team.Constructor.name}</td>
-                  <td className="td-teams3"><a href={team.Constructor.url} target="_blank" >Details<ExportOutlined /></a></td>
-                  <td className="td-teams-points">{team.points}</td>
+                  <td className="td-driver">{team.position}</td>
+                  <td className="td-driver2" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
+                    <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} className="flag" />{team.Constructor.name}</td>
+                  <td className="td-driver3"><a href={team.Constructor.url} target="_blank" className="detailstext">Details  <ExportOutlined /></a></td>
+                  <td className="td-driver">{team.points}</td>
                 </tr>
               );
-            })};
+            })}
           </tbody>
         </table>
       </div>
