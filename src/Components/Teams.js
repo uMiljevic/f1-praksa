@@ -74,7 +74,10 @@ export default function App(props) {
       <div className="table-scroll">
         <table className="main-table">
           <thead >
-            <th  colSpan={4}>Constructors Championship Standings - 2013</th>
+            <th className="thead-center">Pos</th>
+            <th>Team</th>
+            <th>Details</th>
+            <th className="thead-center">Points</th>
           </thead>
           <tbody>
             {filteredData.map((team)=> {
