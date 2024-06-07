@@ -23,7 +23,6 @@ export default function Drivers(props) {
     const getDrivers = async () => {
         const url = "https://ergast.com/api/f1/2013/driverStandings.json";
         const response = await axios.get(url);
-        console.log(response.data.MRData.StandingsTable.StandingsLists[0]);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setIsLoading(false);
     }
@@ -92,7 +91,6 @@ export default function Drivers(props) {
                                     <td className="td-driver3">{driver.Constructors[0].name} </td>
                                     <td className="td-driver">{driver.points}  </td>
                                 </tr>
-
                             );
                         })}
                     </tbody>

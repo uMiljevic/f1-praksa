@@ -29,7 +29,6 @@ export default function DriverDetails(props) {
         const responseDetails = await axios.get(urlStandings);
         const responeseResults = await axios.get(urlResults);
 
-        console.log(responseDetails);
         setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
         setDriverResults(responeseResults.data.MRData.RaceTable.Races);
 
@@ -114,11 +113,7 @@ export default function DriverDetails(props) {
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-
-
         </div>
     )
 };
