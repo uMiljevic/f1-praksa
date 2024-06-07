@@ -84,9 +84,9 @@ export default function App(props) {
           </thead>
           <tbody>
             {filteredData.map((team) => {
-              //console.log('team', team);
+              console.log('team', team);
               return (
-                <tr key={team.teamId}>
+                <tr key={team.Constructor.constructorId}>
                   <td className="td-driver">{team.position}</td>
                   <td className="td-driver2" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
                     <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} className="flag" />{team.Constructor.name}</td>
