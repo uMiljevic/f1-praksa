@@ -27,8 +27,8 @@ export default function TeamDetails(props) {
     const teamId = params.teamId;
     //console.log(teamId);
 
-    const urlTeamDetails = `http://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`;
-    const urlTeamResults = `http://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
+    const urlTeamDetails = `https://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`;
+    const urlTeamResults = `https://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
 
     const detailsResponse = await axios.get(urlTeamDetails);
     //console.log("details", detailsResponse);

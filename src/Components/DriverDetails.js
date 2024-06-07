@@ -23,8 +23,8 @@ export default function DriverDetails(props) {
 
     const getDriverDetails = async () => {
         const driverId = params.driverId;
-        const urlStandings = `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
-        const urlResults = `http://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
+        const urlStandings = `https://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
+        const urlResults = `https://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
 
         const responseDetails = await axios.get(urlStandings);
         const responeseResults = await axios.get(urlResults);
