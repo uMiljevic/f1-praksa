@@ -24,16 +24,12 @@ export default function TeamDetails(props) {
 
   const getTeamDetails = async () => {
     const teamId = params.teamId;
-    //console.log(teamId);
 
     const urlTeamDetails = `http://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`;
     const urlTeamResults = `http://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
 
     const detailsResponse = await axios.get(urlTeamDetails);
-    //console.log("details", detailsResponse);
     const resultsResponse = await axios.get(urlTeamResults);
-    //console.log('results', resultsResponse.data.MRData.RaceTable.Races[0]);
-    // console.log('results', resultsResponse.data);
 
     setTeamDetails(detailsResponse.data.MRData.StandingsTable.StandingsLists[0]);
     setTeamResults(resultsResponse.data.MRData.RaceTable.Races);
@@ -101,7 +97,6 @@ export default function TeamDetails(props) {
             </thead>
             <tbody>
               {teamResults.map((teamresult) => {
-                //console.log('teamresult', teamresult);
                 return (
                   <tr key={teamresult.teamId}>
                     <td className="td-driver">{teamresult.round}</td>
