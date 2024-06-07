@@ -22,7 +22,7 @@ export default function App(props) {
   }, []);
 
   const getTeams = async () => {
-    const urlAllteams = "http://ergast.com/api/f1/2013/constructorStandings.json";
+    const urlAllteams = "https://ergast.com/api/f1/2013/constructorStandings.json";
     const response = await axios.get(urlAllteams);
     //console.log(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
     setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
