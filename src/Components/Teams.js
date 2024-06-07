@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode } from "../Utils.js";
 import { Input, Space } from 'antd';
-import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
+import { ExportOutlined } from "@ant-design/icons";
+import Loader from "./Loader.js";
 
 
 
@@ -21,7 +22,7 @@ export default function App(props) {
   }, []);
 
   const getTeams = async () => {
-    const urlAllteams = "http://ergast.com/api/f1/2013/constructorStandings.json";
+    const urlAllteams = "https://ergast.com/api/f1/2013/constructorStandings.json";
     const response = await axios.get(urlAllteams);
     
     setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
@@ -46,17 +47,17 @@ export default function App(props) {
   };
 
   if (isLoading) {
-    return <LoadingOutlined />;
+    return <Loader />;
   }
 
 
   return (
 
     <div className="main-driver-container">
-          <div className="title-search">
-              <div>
-                  <h1>Constructors Championship</h1>
-              </div>
+      <div className="title-search">
+        <div>
+          <h1>Constructors Championship</h1>
+        </div>
         {/* <input type="text" placeholder="Search" /> */}
         <Space direction="vertical">
           <Search
@@ -72,15 +73,17 @@ export default function App(props) {
       <div className="table-scroll">
         <table className="main-table">
           <thead >
-            <th>Pos</th>
-            <th>Team</th>
-            <th>Details</th>
-            <th>Points</th>
+            <tr>
+              <th>Pos</th>
+              <th>Team</th>
+              <th>Details</th>
+              <th>Points</th>
+            </tr>
           </thead>
           <tbody>
             {filteredData.map((team)=> {
               return (
-                <tr key={team.teamId}>
+                <tr key={team.Constructor.constructorId}>
                   <td className="td-driver">{team.position}</td>
                   <td className="td-driver2" onClick={() => handleGetTeamDetails(team.Constructor.constructorId)}>
                     <Flag country={getAlphaCode(props.flags, team.Constructor.nationality)} size={40} className="flag" />{team.Constructor.name}</td>
@@ -92,6 +95,6 @@ export default function App(props) {
           </tbody>
         </table>
       </div>
-</div>
+    </div>
   );
 }

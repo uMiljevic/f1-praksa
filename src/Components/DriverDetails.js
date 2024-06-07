@@ -23,13 +23,12 @@ export default function DriverDetails(props) {
 
     const getDriverDetails = async () => {
         const driverId = params.driverId;
-        const urlStandings = `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
-        const urlResults = `http://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
+        const urlStandings = `https://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
+        const urlResults = `https://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
 
         const responseDetails = await axios.get(urlStandings);
         const responeseResults = await axios.get(urlResults);
 
-        console.log(responseDetails);
         setDriverDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
         setDriverResults(responeseResults.data.MRData.RaceTable.Races);
 
@@ -68,32 +67,36 @@ export default function DriverDetails(props) {
                     </div>
                     <hr />
                     <table className="details">
-                        <tr>
-                            <td><b>Country: </b></td>
-                            <td>{driverDetails.Driver.nationality}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Team: </b></td>
-                            <td>{driverDetails.Constructors[0].name}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Birth: </b></td>
-                            <td>{driverDetails.Driver.dateOfBirth}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Biography: </b></td>
-                            <td><a href={driverDetails.Driver.url} target="_blanc">Read <ExportOutlined /></a></td>
-                        </tr>
+                        <tbody>
+                            <tr>
+                                <td><b>Country: </b></td>
+                                <td>{driverDetails.Driver.nationality}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Team: </b></td>
+                                <td>{driverDetails.Constructors[0].name}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Birth: </b></td>
+                                <td>{driverDetails.Driver.dateOfBirth}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Biography: </b></td>
+                                <td><a href={driverDetails.Driver.url} target="_blanc">Read <ExportOutlined /></a></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className="table-scroll">
                     <table className="main-table">
                         <thead>
-                            <th>Round</th>
-                            <th>Grand Prix</th>
-                            <th>Team</th>
-                            <th>Grid</th>
-                            <th>Race</th>
+                            <tr>
+                                <th>Round</th>
+                                <th>Grand Prix</th>
+                                <th>Team</th>
+                                <th>Grid</th>
+                                <th>Race</th>
+                            </tr>
                         </thead>
                         <tbody>
                             {driverResults.map((results) => {
@@ -110,11 +113,7 @@ export default function DriverDetails(props) {
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
-
-
         </div>
     )
 };

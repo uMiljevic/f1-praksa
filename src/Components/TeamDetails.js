@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import Flag from 'react-flagkit';
 import { getAlphaCode, getPositionColor } from "../Utils.js";
 import { useNavigate } from "react-router-dom";
-import { ExportOutlined, LoadingOutlined } from "@ant-design/icons";
+import { ExportOutlined } from "@ant-design/icons";
+import Loader from "./Loader.js";
 
 
 export default function TeamDetails(props) {
@@ -25,8 +26,8 @@ export default function TeamDetails(props) {
   const getTeamDetails = async () => {
     const teamId = params.teamId;
 
-    const urlTeamDetails = `http://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`;
-    const urlTeamResults = `http://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
+    const urlTeamDetails = `https://ergast.com/api/f1/2013/constructors/${teamId}/constructorStandings.json`;
+    const urlTeamResults = `https://ergast.com/api/f1/2013/constructors/${teamId}/results.json`;
 
     const detailsResponse = await axios.get(urlTeamDetails);
     const resultsResponse = await axios.get(urlTeamResults);
@@ -42,7 +43,7 @@ export default function TeamDetails(props) {
   }
 
   if (isLoading) {
-    return <LoadingOutlined />;
+    return <Loader />;
   }
 
   return (
@@ -89,11 +90,13 @@ export default function TeamDetails(props) {
         <div className="table-scroll">
           <table className="main-table" >
             <thead>
-              <th>Round</th>
-              <th>Grand Prix</th>
-              <th>{teamResults[0].Results[0].Driver.familyName}</th>
-              <th>{teamResults[0].Results[1].Driver.familyName}</th>
-              <th>Points</th>
+              <tr>
+                <th>Round</th>
+                <th>Grand Prix</th>
+                <th>{teamResults[0].Results[0].Driver.familyName}</th>
+                <th>{teamResults[0].Results[1].Driver.familyName}</th>
+                <th>Points</th>
+              </tr>
             </thead>
             <tbody>
               {teamResults.map((teamresult) => {

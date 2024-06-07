@@ -21,9 +21,8 @@ export default function Drivers(props) {
     }, []);
 
     const getDrivers = async () => {
-        const url = "http://ergast.com/api/f1/2013/driverStandings.json";
+        const url = "https://ergast.com/api/f1/2013/driverStandings.json";
         const response = await axios.get(url);
-        console.log(response.data.MRData.StandingsTable.StandingsLists[0]);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setIsLoading(false);
     }
@@ -73,10 +72,12 @@ export default function Drivers(props) {
             <div className="table-scroll">
                 <table className="main-table">
                     <thead>
-                        <th>Position</th>
-                        <th>Driver</th>
-                        <th>Team</th>
-                        <th>Points</th>
+                        <tr>
+                            <th>Position</th>
+                            <th>Driver</th>
+                            <th>Team</th>
+                            <th>Points</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {filteredData.map((driver) => {
@@ -90,7 +91,6 @@ export default function Drivers(props) {
                                     <td className="td-driver3">{driver.Constructors[0].name} </td>
                                     <td className="td-driver">{driver.points}  </td>
                                 </tr>
-
                             );
                         })}
                     </tbody>
